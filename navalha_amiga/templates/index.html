@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Navalha Amiga — Software de gestão para barbearias. Controle de agendamentos, planos de assinatura e financeiro em um único lugar." />
+  <title>Navalha Amiga — Gestão Inteligente para Barbearias</title>
+
+  <!-- Favicon placeholder -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+
+<!-- =============================================
+     NAVBAR
+     ============================================= -->
+<nav class="navbar-na" id="mainNav">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-between">
+
+      <!-- Brand -->
+      <a href="#" class="nav-brand">Navalha<span>Amiga</span></a>
+
+      <!-- Desktop links -->
+      <div class="d-none d-lg-flex align-items-center gap-2">
+        <a href="#pain"     class="nav-link-custom">Problemas</a>
+        <a href="#features" class="nav-link-custom">Recursos</a>
+        <a href="#pricing"  class="nav-link-custom">Preços</a>
+        <a href="#faq"      class="nav-link-custom">FAQ</a>
+        <a href="#pricing" class="btn-gold ms-3" style="padding:10px 22px;font-size:0.82rem;">
+          <i class="bi bi-scissors"></i> Começar Agora
+        </a>
+      </div>
+
+      <!-- Mobile toggle -->
+      <button class="navbar-toggler d-lg-none" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
+        <i class="bi bi-list" style="color:var(--gold);font-size:1.4rem;"></i>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="collapse" id="mobileMenu">
+      <div class="d-flex flex-column gap-1 pt-3 pb-2">
+        <a href="#pain"     class="nav-link-custom">Problemas</a>
+        <a href="#features" class="nav-link-custom">Recursos</a>
+        <a href="#pricing"  class="nav-link-custom">Preços</a>
+        <a href="#faq"      class="nav-link-custom">FAQ</a>
+        <a href="#pricing" class="btn-gold mt-2 text-center">Começar Agora</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<!-- =============================================
+     HERO
+     ============================================= -->
+<section id="hero">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+
+      <!-- LEFT -->
+      <div class="col-lg-6">
+
+        <div class="hero-badge" data-aos="fade-down">
+          <span class="dot"></span>
+          Software nº 1 para barbearias
+        </div>
+
+        <h1 class="hero-headline" data-aos="fade-up" data-aos-delay="100">
+          Chega de <span class="stroke">Caos</span>.<br>
+          Hora de Lucrar de<br>
+          <span class="gold">Verdade.</span>
+        </h1>
+
+        <p class="hero-sub" data-aos="fade-up" data-aos-delay="200">
+          A Navalha Amiga automatiza agendamentos, controla planos de assinatura e garante que seu financeiro nunca mais fique no papel. Gestão profissional para barbearia profissional.
+        </p>
+
+        <div class="hero-cta-group" data-aos="fade-up" data-aos-delay="300">
+          <a href="#pricing" class="btn-gold">
+            <i class="bi bi-lightning-charge-fill"></i>
+            Teste 7 dias grátis
+          </a>
+          <a href="#features" class="btn-outline-gold">
+            <i class="bi bi-play-circle"></i>
+            Ver como funciona
+          </a>
+        </div>
+
+        <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+          <div>
+            <div class="hero-stat-val">+<span data-count="500">0</span></div>
+            <div class="hero-stat-lbl">Barbearias ativas</div>
+          </div>
+          <div>
+            <div class="hero-stat-val"><span data-count="89">0</span>%</div>
+            <div class="hero-stat-lbl">Redução de no-shows</div>
+          </div>
+          <div>
+            <div class="hero-stat-val"><span data-count="3">0</span>h/dia</div>
+            <div class="hero-stat-lbl">Tempo economizado</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — Mockup -->
+      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+        <div class="hero-mockup">
+          <div class="mockup-glow"></div>
+          <div class="mockup-phone">
+            <div class="mockup-header">
+              <span class="dot-r"></span>
+              <span class="dot-y"></span>
+              <span class="dot-g"></span>
+              <span>navalha.amiga — agenda hoje</span>
+            </div>
+            <div class="mockup-body">
+
+              <div class="mockup-row">
+                <div class="mockup-avatar">JL</div>
+                <div class="mockup-info">
+                  <div class="mockup-name">João Luís — Degradê + Barba</div>
+                  <div class="mockup-time">09:00 · Plano Gold</div>
+                </div>
+                <span class="mockup-badge badge-pago">Pago</span>
+              </div>
+
+              <div class="mockup-row">
+                <div class="mockup-avatar">RS</div>
+                <div class="mockup-info">
+                  <div class="mockup-name">Rafael S. — Corte Clássico</div>
+                  <div class="mockup-time">10:30 · Crédito</div>
+                </div>
+                <span class="mockup-badge badge-credito">Crédito</span>
+              </div>
+
+              <div class="mockup-row">
+                <div class="mockup-avatar">MF</div>
+                <div class="mockup-info">
+                  <div class="mockup-name">Marcos F. — Barba Design</div>
+                  <div class="mockup-time">11:15 · Avulso</div>
+                </div>
+                <span class="mockup-badge badge-pending">Aguard.</span>
+              </div>
+
+              <div class="mockup-chart">
+                <div class="chart-title">Faturamento — Últimos 7 dias</div>
+                <div class="chart-bars">
+                  <div class="chart-bar" style="height:40%"></div>
+                  <div class="chart-bar" style="height:55%"></div>
+                  <div class="chart-bar" style="height:70%"></div>
+                  <div class="chart-bar" style="height:50%"></div>
+                  <div class="chart-bar" style="height:85%"></div>
+                  <div class="chart-bar" style="height:60%"></div>
+                  <div class="chart-bar active" style="height:95%"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     SOCIAL PROOF STRIP
+     ============================================= -->
+<section id="social-proof">
+  <div class="container">
+    <div class="row gy-4 text-center">
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="0">
+        <div class="proof-item">
+          <div class="proof-val">+<span data-count="500">0</span></div>
+          <div class="proof-lbl">Barbearias no Brasil</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="80">
+        <div class="proof-item">
+          <div class="proof-val"><span data-count="89">0</span>%</div>
+          <div class="proof-lbl">Menos faltas</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="160">
+        <div class="proof-item">
+          <div class="proof-val">R$<span data-count="18">0</span>k</div>
+          <div class="proof-lbl">Faturamento médio extra/mês</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="240">
+        <div class="proof-item">
+          <div class="proof-val"><span data-count="95">0</span>%</div>
+          <div class="proof-lbl">Taxa de presença</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     PAIN POINTS
+     ============================================= -->
+<section id="pain" class="section-padding">
+  <div class="container">
+
+    <div class="text-center mb-5" data-aos="fade-up">
+      <div class="gold-line mx-auto"></div>
+      <h2 class="section-title">Se você se identifica com<br><span>qualquer um desses</span> problemas...</h2>
+      <p class="section-subtitle mx-auto mt-3">A Navalha Amiga foi feita exatamente pra resolver isso.</p>
+    </div>
+
+    <div class="row gy-4">
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="bm-card h-100">
+          <div class="pain-number">01</div>
+          <div class="pain-icon">👻</div>
+          <h3 class="pain-title">Cliente marca e não aparece</h3>
+          <p class="pain-desc">Você reserva o horário, espera 20 minutos, e o cliente some. Agenda furada, dinheiro perdido e estresse garantido.</p>
+          <div class="pain-loss">📉 Até R$1.600/mês jogados fora com no-shows</div>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="120">
+        <div class="bm-card h-100">
+          <div class="pain-number">02</div>
+          <div class="pain-icon">📋</div>
+          <h3 class="pain-title">Controle financeiro no papel</h3>
+          <p class="pain-desc">Caderno rasgado, conta que não fecha, cliente que "paga depois" e você nunca sabe quanto realmente faturou no mês.</p>
+          <div class="pain-loss">💸 Sem controle financeiro, você não cresce</div>
+        </div>
+      </div>
+
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="240">
+        <div class="bm-card h-100">
+          <div class="pain-number">03</div>
+          <div class="pain-icon">📱</div>
+          <h3 class="pain-title">Agenda gerenciada no WhatsApp</h3>
+          <p class="pain-desc">3 horas por dia respondendo mensagens, confirmando horários, lidando com encaixes e remarcações. Você virou secretário de barbearia.</p>
+          <div class="pain-loss">⏱️ 3h/dia desperdiçadas = 90h/mês perdidas</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="gold-divider"></div>
+
+
+<!-- =============================================
+     FEATURES
+     ============================================= -->
+<section id="features" class="section-padding">
+  <div class="container">
+
+    <div class="text-center mb-5" data-aos="fade-up">
+      <div class="gold-line mx-auto"></div>
+      <h2 class="section-title">Ferramentas de <span>Elite</span><br>para Barbearias de Elite</h2>
+      <p class="section-subtitle mx-auto mt-3">Tudo que você precisa para parar de apagar incêndio e começar a crescer de verdade.</p>
+    </div>
+
+    <div class="row gy-4">
+
+      <!-- Feature 1 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="bm-card h-100">
+          <div class="feature-icon-wrap">💎</div>
+          <h4 class="mb-2" style="font-size:1.35rem;">Planos de Assinatura</h4>
+          <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Crie planos mensais para fidelizar clientes. Eles pagam uma vez por mês e têm acesso a cortes ilimitados — você garante receita recorrente e previsível.</p>
+          <span class="feature-tag">Receita Recorrente</span>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="bm-card h-100">
+          <div class="feature-icon-wrap">🪙</div>
+          <h4 class="mb-2" style="font-size:1.35rem;">Controle de Créditos</h4>
+          <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Sistema automático de saldo de créditos por cliente. Cada serviço desconta automaticamente — sem confusão, sem dívida, sem cliente reclamando.</p>
+          <span class="feature-tag">100% Automático</span>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="bm-card h-100">
+          <div class="feature-icon-wrap">🔔</div>
+          <h4 class="mb-2" style="font-size:1.35rem;">Notificações de Agendamento</h4>
+          <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Lembretes automáticos por WhatsApp antes de cada horário. Cliente confirma em 1 clique. Sua taxa de no-show vai para zero.</p>
+          <span class="feature-tag">Zero No-Show</span>
+        </div>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="bm-card h-100">
+          <div class="feature-icon-wrap">📊</div>
+          <h4 class="mb-2" style="font-size:1.35rem;">Dashboard Financeiro</h4>
+          <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Veja em tempo real quanto você faturou hoje, essa semana e esse mês. Relatórios de comissão, fluxo de caixa e muito mais no mesmo lugar.</p>
+          <span class="feature-tag">Visão Completa</span>
+        </div>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="bm-card h-100">
+          <div class="feature-icon-wrap">📅</div>
+          <h4 class="mb-2" style="font-size:1.35rem;">Agenda Online 24/7</h4>
+          <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Seu cliente agenda pelo link na bio do Instagram a qualquer hora — sem você precisar responder uma mensagem sequer. A agenda preenche sozinha.</p>
+          <span class="feature-tag">Agenda Automática</span>
+        </div>
+      </div>
+
+      <!-- Feature 6 -->
+      <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="bm-card h-100">
+          <div class="feature-icon-wrap">👥</div>
+          <h4 class="mb-2" style="font-size:1.35rem;">Multi-Barbeiros</h4>
+          <p style="color:var(--text-muted);font-size:0.92rem;line-height:1.7;">Gerencie toda a equipe em um único painel. Cada barbeiro tem sua agenda, comissões calculadas automaticamente e acesso separado.</p>
+          <span class="feature-tag">Equipe Completa</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<div class="gold-divider"></div>
+
+
+<!-- =============================================
+     PRICING
+     ============================================= -->
+<section id="pricing" class="section-padding">
+  <div class="container">
+
+    <div class="text-center mb-5" data-aos="fade-up">
+      <div class="gold-line mx-auto"></div>
+      <h2 class="section-title">Um Investimento.<br><span>Retorno Infinito.</span></h2>
+      <p class="section-subtitle mx-auto mt-3">Sem tiers confusos. Sem cobranças escondidas. Um plano completo com tudo dentro.</p>
+    </div>
+
+    <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
+      <div class="col-lg-6 col-md-8">
+
+        <div class="pricing-card">
+          <div class="pricing-crown">✦ Plano Completo ✦</div>
+
+          <div class="pricing-plan-name mt-3">Navalha Amiga Pro</div>
+
+          <div class="pricing-old">De R$ 297/mês</div>
+          <div class="pricing-price"><sup>R$</sup>97</div>
+          <div class="pricing-period">/ mês — Tudo incluso, sem limites</div>
+
+          <div class="pricing-highlight">
+            🔥 Você já paga isso com <strong>2 clientes que não voltam</strong> por mês. Com a gente, eles sempre voltam.
+          </div>
+
+          <ul class="pricing-list">
+            <li><span class="check"><i class="bi bi-check-lg"></i></span> Agendamento online 24/7 com link personalizado</li>
+            <li><span class="check"><i class="bi bi-check-lg"></i></span> Planos de assinatura mensais para clientes</li>
+            <li><span class="check"><i class="bi bi-check-lg"></i></span> Controle automático de créditos</li>
+            <li><span class="check"><i class="bi bi-check-lg"></i></span> Notificações automáticas no WhatsApp</li>
+            <li><span class="check"><i class="bi bi-check-lg"></i></span> Dashboard financeiro completo</li>
+            <li><span class="check"><i class="bi bi-check-lg"></i></span> Multi-barbeiros (equipe ilimitada)</li>
+            <li><span class="check"><i class="bi bi-check-lg"></i></span> Relatórios de comissão automáticos</li>
+            <li><span class="check"><i class="bi bi-check-lg"></i></span> Suporte via WhatsApp 7 dias por semana</li>
+          </ul>
+
+          <a href="#" class="btn-gold w-100 justify-content-center" style="padding:16px;">
+            <i class="bi bi-lightning-charge-fill"></i>
+            Começar meus 7 dias grátis
+          </a>
+
+          <div class="pricing-guarantee mt-3">
+            <i class="bi bi-shield-check" style="color:var(--gold);"></i>
+            <span>Garantia de 30 dias</span> — Não gostou? Devolvemos cada centavo.
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<div class="gold-divider"></div>
+
+
+<!-- =============================================
+     FAQ
+     ============================================= -->
+<section id="faq" class="section-padding">
+  <div class="container">
+
+    <div class="text-center mb-5" data-aos="fade-up">
+      <div class="gold-line mx-auto"></div>
+      <h2 class="section-title">Perguntas <span>Frequentes</span></h2>
+    </div>
+
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
+      <div class="col-lg-8">
+
+        {% set faqs = [
+          ("Preciso saber mexer com tecnologia?",
+           "Não. A Navalha Amiga foi pensada para o barbeiro, não para o TI. A interface é simples, intuitiva e você aprende a usar em menos de 30 minutos. E se tiver dúvida, nosso suporte está no WhatsApp."),
+
+          ("Funciona para barbearia pequena ou só para grandes?",
+           "Funciona para qualquer tamanho. Se você faz 3 cortes por dia, já vale a pena. O sistema se paga sozinho em menos de uma semana eliminando os furos de agenda."),
+
+          ("Como funciona o teste grátis?",
+           "Você cria sua conta e usa 7 dias sem pagar nada e sem precisar de cartão de crédito. Se gostar, assina. Se não gostar, não cobra nada. Simples assim."),
+
+          ("Meus clientes precisam baixar algum app?",
+           "Não. O agendamento funciona pelo navegador, qualquer celular. Seu cliente abre o link, escolhe o horário e pronto — sem instalar nada."),
+
+          ("O sistema funciona com quantos barbeiros?",
+           "Com o plano Pro você tem barbeiros ilimitados, cada um com agenda e comissão separadas. Não tem cobrança extra por colaborador."),
+
+          ("E se eu quiser cancelar?",
+           "Cancele quando quiser, sem burocracia. Não temos fidelidade. E se cancelar nos primeiros 30 dias, devolvemos seu dinheiro integralmente.")
+        ] %}
+
+        {% for q, a in faqs %}
+        <div class="faq-item">
+          <button class="faq-question">
+            {{ q }}
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">{{ a }}</div>
+          </div>
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     CTA FINAL
+     ============================================= -->
+<section id="cta-final">
+  <div class="container">
+    <div class="cta-card" data-aos="zoom-in">
+      <div class="gold-line mx-auto mb-4"></div>
+      <h2 class="section-title mb-3" data-aos="fade-up">Sua barbearia merece<br><span>gestão de verdade.</span></h2>
+      <p style="color:var(--text-muted);max-width:500px;margin:0 auto 2.5rem;" data-aos="fade-up" data-aos-delay="100">
+        Chega de perder dinheiro com no-show, agenda desorganizada e financeiro no caderno. Comece hoje, de graça.
+      </p>
+      <div class="d-flex flex-wrap gap-3 justify-content-center" data-aos="fade-up" data-aos-delay="200">
+        <a href="#pricing" class="btn-gold" style="padding:16px 40px;font-size:1rem;">
+          <i class="bi bi-scissors"></i>
+          Testar 7 dias grátis — sem cartão
+        </a>
+      </div>
+      <p style="color:var(--text-dim);font-size:0.8rem;margin-top:1.2rem;">✓ Sem cartão &nbsp;·&nbsp; ✓ Cancele quando quiser &nbsp;·&nbsp; ✓ Garantia 30 dias</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- =============================================
+     FOOTER
+     ============================================= -->
+<footer>
+  <div class="container">
+    <div class="row gy-5">
+
+      <div class="col-lg-4">
+        <div class="footer-brand">Navalha<span>Amiga</span></div>
+        <p class="footer-desc">Software de gestão para barbearias que querem crescer com organização, tecnologia e sem dor de cabeça.</p>
+        <div class="footer-social mt-3">
+          <a href="#" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" title="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Produto</div>
+        <ul class="footer-links">
+          <li><a href="#features">Recursos</a></li>
+          <li><a href="#pricing">Preços</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Empresa</div>
+        <ul class="footer-links">
+          <li><a href="#">Sobre nós</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contato</a></li>
+          <li><a href="#">Afiliados</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Termos de Uso</a></li>
+          <li><a href="#">Privacidade</a></li>
+          <li><a href="#">LGPD</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Suporte</div>
+        <ul class="footer-links">
+          <li><a href="#">Central de Ajuda</a></li>
+          <li><a href="#">WhatsApp</a></li>
+          <li><a href="#">Status</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {{ 2025 }} Navalha Amiga. Todos os direitos reservados.</p>
+      <p>Feito com ✦ para barbearias brasileiras</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- =============================================
+     SCRIPTS
+     ============================================= -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 700,
+    easing: 'ease-out-cubic',
+    once: true,
+    offset: 60
+  });
+</script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>
