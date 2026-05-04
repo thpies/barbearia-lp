@@ -1,1033 +1,1041 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Nivela — Sistema de gestão premium para barbearias. Controle planos de assinatura, agenda automática e financeiro em tempo real."/>
-  <meta property="og:title" content="Nivela — Gestão de Barbearia em Outro Nível"/>
-  <meta property="og:description" content="Planos de assinatura, agenda automática e controle financeiro real. Para barbearias que querem crescer."/>
-  <title>Nivela — Gestão de Barbearia em Outro Nível</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nivela - sistema de gestão para barbearias. Agenda, fila, caixa, financeiro, estoque, planos de assinatura e equipe em um único lugar.">
+  <title>Nivela - Gestão de Barbearia em Outro Nível</title>
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23C9A84C' rx='20' width='100' height='100'/><text y='.9em' font-size='60' x='20'>✂</text></svg>"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="icon" href="{{ static_asset('icons/dashboard-mark.png') }}">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet"/>
-
-  <!-- Bootstrap 5 + Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
-
-  <!-- AOS -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
-
-  <!-- Custom -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <link rel="stylesheet" href="{{ static_asset('css/style.css') }}">
 </head>
 <body>
-
-<!-- ================================================================
-     NAVBAR
-     ================================================================ -->
-<nav id="nav">
-  <div class="wrap">
-    <div class="nav-inner">
-
-      <!-- Wordmark -->
-      <a href="#" class="wordmark">
-        N<span>i</span>vela
-        <span class="level-line"></span>
-      </a>
-
-      <!-- Desktop links -->
-      <ul class="nav-links d-none d-lg-flex">
-        <li><a href="#pain">Problemas</a></li>
-        <li><a href="#features">Recursos</a></li>
-        <li><a href="#demo">Demo</a></li>
-        <li><a href="#pricing">Preços</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-
-      <div class="nav-right">
-        <!-- ★ Botão de acesso ao sistema para clientes ativos ★ -->
-        <a href="/entrar" class="btn-login" title="Acesso exclusivo para clientes Nivela">
-          <span class="dot"></span>
-          Já sou cliente
-          <i class="bi bi-arrow-right" style="font-size:0.75rem;"></i>
+  <nav id="nav">
+    <div class="wrap">
+      <div class="nav-inner">
+        <a class="brand" href="#hero">
+          <img src="{{ static_asset('icons/dashboard-mark.png') }}" width="34" height="34" decoding="async" alt="">
+          <span>Nivela</span>
         </a>
-
-        <a href="#pricing" class="btn btn-gold btn-sm d-none d-md-inline-flex">
-          <i class="bi bi-lightning-charge-fill"></i> Começar grátis
-        </a>
-
-        <button class="nav-mobile-btn" id="mobileToggle">
-          <i class="bi bi-list"></i>
-        </button>
+        <ul class="nav-links">
+          <li><a href="#pain">Soluções</a></li>
+          <li><a href="#demo">Demo</a></li>
+          <li><a href="#pricing">Planos</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="{{ url_for('site.entrar') }}" class="btn btn-ghost">Já sou cliente</a>
+          <a href="#pricing" class="btn btn-gold">Conhecer planos</a>
+          <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Abrir menu">
+            <i class="bi bi-list"></i>
+          </button>
+        </div>
+      </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#pain">Problemas</a>
+        <a href="#demo">Demo</a>
+        <a href="#pricing">Planos</a>
+        <a href="#faq">FAQ</a>
+        <a href="{{ url_for('site.entrar') }}">Já sou cliente</a>
       </div>
     </div>
+  </nav>
 
-    <!-- Mobile menu -->
-    <div id="mobileMenu" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;">
-      <style>
-        #mobileMenu.open { max-height: 400px !important; }
-        #mobileMenu { border-top: 1px solid var(--border); margin-top: 12px; padding-top: 12px; }
-      </style>
-      <div style="display:flex;flex-direction:column;gap:4px;padding-bottom:14px;">
-        <a href="#pain"     style="padding:10px 6px;font-size:.9rem;color:var(--text-2);">Problemas</a>
-        <a href="#features" style="padding:10px 6px;font-size:.9rem;color:var(--text-2);">Recursos</a>
-        <a href="#demo"     style="padding:10px 6px;font-size:.9rem;color:var(--text-2);">Demo</a>
-        <a href="#pricing"  style="padding:10px 6px;font-size:.9rem;color:var(--text-2);">Preços</a>
-        <a href="#faq"      style="padding:10px 6px;font-size:.9rem;color:var(--text-2);">FAQ</a>
-        <div style="height:1px;background:var(--border);margin:6px 0;"></div>
-        <a href="/entrar" class="btn-login" style="width:fit-content;">
-          <span class="dot"></span> Já sou cliente — Entrar
-        </a>
-        <a href="#pricing" class="btn btn-gold btn-sm mt-2" style="width:fit-content;">Começar grátis</a>
-      </div>
-    </div>
-  </div>
-</nav>
-
-
-<!-- ================================================================
-     HERO
-     ================================================================ -->
-<section id="hero">
-  <!-- Background effects -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-  <div class="hero-grid"></div>
-
-  <div class="wrap">
-    <div class="row align-items-center g-5">
-
-      <!-- Left -->
-      <div class="col-lg-6 hero-content">
-
-        <div class="hero-badge" data-aos="fade-down">
-          <span class="hero-badge-dot"></span>
-          Software para barbearias profissionais
-        </div>
-
-        <h1 class="display mb-4" data-aos="fade-up" data-aos-delay="80">
-          Sua barbearia<br>
-          no <span class="solid">nível</span><br>
-          <span class="outline">certo.</span>
-        </h1>
-
-        <p class="hero-sub" data-aos="fade-up" data-aos-delay="160">
-          Planos de assinatura, controle de créditos, agenda automática e financeiro em tempo real. Tudo em um único sistema construído para barbearias que levam o negócio a sério.
-        </p>
-
-        <div class="hero-ctas" data-aos="fade-up" data-aos-delay="220">
-          <a href="#pricing" class="btn btn-gold">
-            <i class="bi bi-lightning-charge-fill"></i>
-            Teste 7 dias grátis
-          </a>
-          <a href="#features" class="btn btn-ghost">
-            <i class="bi bi-play-circle"></i>
-            Como funciona
-          </a>
-        </div>
-
-        <div class="hero-proof" data-aos="fade-up" data-aos-delay="300">
-          <div class="proof-avatars">
-            <div class="proof-avatar pa-1">JL</div>
-            <div class="proof-avatar pa-2">MF</div>
-            <div class="proof-avatar pa-3">RS</div>
-            <div class="proof-avatar pa-4">TC</div>
-          </div>
-          <div class="proof-text">
-            <strong>+500 barbearias</strong> já usam o Nivela
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Right — Dashboard Mockup -->
-      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-        <div class="hero-mockup-wrap">
-
-          <!-- Floating mini card top-right -->
-          <div class="float-card fc-1">
-            <div class="fc-label">Receita hoje</div>
-            <div class="fc-val">R$ 1.240</div>
-            <div class="fc-sub">↑ 18% vs ontem</div>
+  <main>
+    <section id="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-badge"><i class="bi bi-shield-check"></i> Sistema operacional para barbearias profissionais</div>
+            <h1 class="hero-title">Gestão premium para <span class="gold">barbearias</span><br>que cobram pelo padrão.</h1>
+            <p class="hero-sub">
+              O Nivela organiza agenda, fila, caixa, financeiro, estoque, assinaturas e equipe com uma experiência pensada para operação séria, recorrente e conferível.
+            </p>
+            <div class="hero-actions">
+              <a href="#pricing" class="btn btn-gold"><i class="bi bi-arrow-up-right"></i> Conhecer planos</a>
+              <a href="#demo" class="btn btn-ghost"><i class="bi bi-window-sidebar"></i> Ver operação</a>
+            </div>
+            <div class="hero-trial-note">
+              <i class="bi bi-check-circle-fill"></i> 7 dias grátis para testar. Sem cartão de crédito e sem compromisso.
+            </div>
+            <div class="hero-proof">
+              <div class="proof-card"><strong>Caixa auditável</strong><span>Abertura, despesas, formas de pagamento e fechamento no mesmo fluxo.</span></div>
+              <div class="proof-card"><strong>Equipe com acesso</strong><span>Permissões por função para dono, gerente e barbeiros.</span></div>
+              <div class="proof-card"><strong>Dados conferíveis</strong><span>Histórico de agenda, pedidos, estoque e assinaturas para consulta.</span></div>
+            </div>
           </div>
 
-          <!-- Floating mini card bottom-left -->
-          <div class="float-card fc-2">
-            <div class="fc-label">Assinantes ativos</div>
-            <div class="fc-val">47</div>
-            <div class="fc-sub">↑ 3 novos esta semana</div>
-          </div>
-
-          <div class="mockup-float">
-            <div class="dashboard">
-              <div class="dash-topbar">
-                <div class="dash-dots">
-                  <span class="dd-r"></span>
-                  <span class="dd-y"></span>
-                  <span class="dd-g"></span>
+          <div class="mockup">
+            <div class="mockup-top">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <div class="mockup-tab">nivela.app - dashboard</div>
+            </div>
+            <div class="mockup-body">
+              <div class="dash-title">
+                <div>
+                  <h3>Hoje na barbearia</h3>
+                  <p>Agenda, fila, caixa e alertas em uma visão operacional.</p>
                 </div>
-                <div class="dash-tab">nivela.app — Dashboard</div>
+                <span class="status">Online</span>
               </div>
-              <div class="dash-body">
-                <!-- KPIs -->
-                <div class="dash-kpis">
-                  <div class="kpi">
-                    <div class="kpi-label">Faturamento</div>
-                    <div class="kpi-val">R$12k</div>
-                    <div class="kpi-delta">↑ 24% este mês</div>
-                  </div>
-                  <div class="kpi">
-                    <div class="kpi-label">Cortes hoje</div>
-                    <div class="kpi-val green">18</div>
-                    <div class="kpi-delta">↑ 3 encaixes</div>
-                  </div>
-                  <div class="kpi">
-                    <div class="kpi-label">No-show</div>
-                    <div class="kpi-val" style="color:var(--red);">2%</div>
-                    <div class="kpi-delta" style="color:var(--green);">↓ 91% redução</div>
+              <div class="kpis">
+                <div class="kpi"><small>Caixa</small><strong>Aberto</strong><em>em conferência</em></div>
+                <div class="kpi"><small>Agenda</small><strong>Hoje</strong><em>reservas e fila</em></div>
+                <div class="kpi"><small>Estoque</small><strong>Alerta</strong><em>mínimo por produto</em></div>
+              </div>
+              <div class="demo-board">
+                <div class="panel">
+                  <div class="panel-title">Agenda e fila <span>Hoje</span></div>
+                  <div class="line"><strong>09:00</strong><span>João Luis<br><small>Degradê + assinatura</small></span><b class="pill">Confirmado</b></div>
+                  <div class="line"><strong>10:30</strong><span>Rafael S.<br><small>Chegou sem marcar</small></span><b class="pill">Fila</b></div>
+                  <div class="line"><strong>12:00</strong><span>Marcos C.<br><small>Corte + pomada</small></span><b class="pill">Pedido</b></div>
+                </div>
+                <div class="panel">
+                  <div class="panel-title">Alertas <span><i class="bi bi-bell"></i></span></div>
+                  <div class="mini-list">
+                    <div><span>Pomada Matte</span><strong>estoque baixo</strong></div>
+                    <div><span>Caixa diário</span><strong style="color:var(--green)">aberto</strong></div>
+                    <div><span>Assinaturas</span><strong>vencimentos próximos</strong></div>
                   </div>
                 </div>
-
-                <!-- Schedule -->
-                <div class="dash-section-title">Agenda de hoje</div>
-                <div class="dash-schedule">
-                  <div class="dash-appt">
-                    <div class="dash-appt-time">09:00</div>
-                    <div class="appt-av">JL</div>
-                    <div class="appt-info">
-                      <div class="appt-name">João Luís</div>
-                      <div class="appt-service">Degradê + Barba · Plano Gold</div>
-                    </div>
-                    <span class="appt-badge ab-plan">Assinante</span>
-                  </div>
-                  <div class="dash-appt">
-                    <div class="dash-appt-time">10:00</div>
-                    <div class="appt-av">RS</div>
-                    <div class="appt-info">
-                      <div class="appt-name">Rafael S.</div>
-                      <div class="appt-service">Corte Clássico · Crédito</div>
-                    </div>
-                    <span class="appt-badge ab-paid">Pago</span>
-                  </div>
-                  <div class="dash-appt">
-                    <div class="dash-appt-time">11:00</div>
-                    <div class="appt-av">MC</div>
-                    <div class="appt-info">
-                      <div class="appt-name">Marcos C.</div>
-                      <div class="appt-service">Barba Design · Avulso</div>
-                    </div>
-                    <span class="appt-badge ab-await">Confirmando</span>
-                  </div>
-                </div>
-
               </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-    </div>
-  </div>
-</section>
-
-
-<!-- ================================================================
-     PROOF BAR
-     ================================================================ -->
-<section id="proof-bar">
-  <div class="wrap">
-    <div class="proof-bar-grid">
-      <div class="proof-bar-item" data-aos="fade-up" data-aos-delay="0">
-        <div class="pb-val">+<span data-count="500">0</span></div>
-        <div class="pb-lbl">Barbearias ativas</div>
-      </div>
-      <div class="proof-bar-item" data-aos="fade-up" data-aos-delay="80">
-        <div class="pb-val"><span data-count="91">0</span>%</div>
-        <div class="pb-lbl">Redução de no-show</div>
-      </div>
-      <div class="proof-bar-item" data-aos="fade-up" data-aos-delay="160">
-        <div class="pb-val">R$<span data-count="18">0</span>k</div>
-        <div class="pb-lbl">Faturamento extra/mês médio</div>
-      </div>
-      <div class="proof-bar-item" data-aos="fade-up" data-aos-delay="240">
-        <div class="pb-val"><span data-count="3">0</span>h/dia</div>
-        <div class="pb-lbl">Tempo economizado</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ================================================================
-     PAIN POINTS
-     ================================================================ -->
-<section id="pain" class="section">
-  <div class="wrap">
-
-    <div class="text-center mb-5" data-aos="fade-up">
-      <div class="gl mx-auto d-block" style="width:40px;"></div>
-      <p class="eyebrow mb-3">A Realidade de Quem Ainda Não Usa o Nivela</p>
-      <h2 class="section-title">Você reconhece<br><span class="t-gold">algum desses cenários?</span></h2>
-    </div>
-
-    <div class="pain-grid">
-
-      {% set pains = [
-        ("01", "👻", "Cliente marca e some",
-         "Horário bloqueado, tempo parado, dinheiro perdido. Você espera 30 minutos e o cliente nem responde no WhatsApp.",
-         "⚠ Até R$1.600/mês perdidos com no-shows"),
-        ("02", "📋", "Financeiro no caderno",
-         "Sem saber quanto faturou no mês, sem controle de comissões, sem previsão de caixa. Você trabalha às cegas.",
-         "⚠ Negócio sem controle não escala"),
-        ("03", "📱", "Agenda no WhatsApp",
-         "3 horas por dia respondendo mensagens, confirmando, remarcando. Você virou secretário da própria barbearia.",
-         "⚠ 90h/mês desperdiçadas"),
-      ] %}
-
-      {% for num, icon, title, text, loss in pains %}
-      <div class="card card-gold-edge" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
-        <div class="pain-card">
-          <div class="pain-num">{{ num }}</div>
-          <div class="pain-icon-wrap">{{ icon }}</div>
-          <h3 class="pain-title">{{ title }}</h3>
-          <p class="pain-text">{{ text }}</p>
-          <div class="pain-loss">{{ loss }}</div>
+    <section class="stats">
+      <div class="wrap">
+        <div class="stats-grid">
+          <div class="stat"><strong>Implantação</strong><span>Configuração guiada para serviços, equipe, horários e formas de pagamento.</span></div>
+          <div class="stat"><strong>Auditoria</strong><span>Caixa diário com histórico para conferir movimentação e fechamento.</span></div>
+          <div class="stat"><strong>Controle</strong><span>Agenda, fila, estoque e assinaturas conectados ao atendimento.</span></div>
+          <div class="stat"><strong>Acesso</strong><span>Uso no celular e permissões por perfil para proteger a operação.</span></div>
         </div>
       </div>
-      {% endfor %}
+    </section>
 
-    </div>
-  </div>
-</section>
-
-
-<!-- ================================================================
-     BEFORE / AFTER
-     ================================================================ -->
-<section id="compare" class="section">
-  <div class="wrap">
-
-    <div class="text-center mb-5" data-aos="fade-up">
-      <div class="gl mx-auto d-block"></div>
-      <p class="eyebrow mb-3">Transformação Real</p>
-      <h2 class="section-title">Antes <span class="t-gold">×</span> Depois do Nivela</h2>
-    </div>
-
-    <div class="compare-grid" data-aos="fade-up" data-aos-delay="100">
-      <!-- ANTES -->
-      <div class="compare-col before">
-        <div class="compare-header">
-          <span class="compare-dot"></span>
-          <span class="compare-title">Sem o Nivela</span>
+    <section id="pain" class="section">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="eyebrow">A realidade sem sistema</div>
+          <h2 class="section-title">Você não precisa trabalhar mais. Precisa perder menos.</h2>
+          <p class="section-sub">A maioria das barbearias não quebra por falta de corte. Quebra por bagunça: horário perdido, caixa confuso e cliente sumindo.</p>
         </div>
-        <ul class="compare-items">
-          <li><span class="ic"><i class="bi bi-x"></i></span> 3–4 horas/dia gerenciando agenda no WhatsApp</li>
-          <li><span class="ic"><i class="bi bi-x"></i></span> 40–50% de clientes que não aparecem</li>
-          <li><span class="ic"><i class="bi bi-x"></i></span> Financeiro no caderno, sem visão de caixa</li>
-          <li><span class="ic"><i class="bi bi-x"></i></span> Sem fidelização — cliente some e não volta</li>
-          <li><span class="ic"><i class="bi bi-x"></i></span> Comissões calculadas na mão, erros frequentes</li>
-          <li><span class="ic"><i class="bi bi-x"></i></span> Faturamento imprevisível todo mês</li>
-        </ul>
-        <div class="compare-result">Resultado: Esforço máximo, lucro mínimo.</div>
-      </div>
-
-      <!-- DEPOIS -->
-      <div class="compare-col after">
-        <div class="compare-header">
-          <span class="compare-dot"></span>
-          <span class="compare-title">Com o Nivela</span>
-        </div>
-        <ul class="compare-items">
-          <li><span class="ic"><i class="bi bi-check"></i></span> Sistema trabalha 24/7 — você só corta cabelo</li>
-          <li><span class="ic"><i class="bi bi-check"></i></span> 95%+ de presença com confirmação automática</li>
-          <li><span class="ic"><i class="bi bi-check"></i></span> Dashboard em tempo real, fluxo de caixa claro</li>
-          <li><span class="ic"><i class="bi bi-check"></i></span> Planos de assinatura que trazem o cliente toda semana</li>
-          <li><span class="ic"><i class="bi bi-check"></i></span> Comissões calculadas automaticamente, sem discussão</li>
-          <li><span class="ic"><i class="bi bi-check"></i></span> Receita recorrente e previsível todo mês</li>
-        </ul>
-        <div class="compare-result">Resultado: +R$ 18.000/mês em faturamento médio.</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ================================================================
-     FEATURES
-     ================================================================ -->
-<section id="features" class="section">
-  <div class="wrap">
-
-    <div class="text-center mb-5" data-aos="fade-up">
-      <div class="gl mx-auto d-block"></div>
-      <p class="eyebrow mb-3">Arsenal Completo</p>
-      <h2 class="section-title">Ferramentas que colocam sua<br><span class="t-gold">barbearia em outro nível</span></h2>
-    </div>
-
-    <!-- Tabs -->
-    <div class="features-tabs" data-aos="fade-up" data-aos-delay="80">
-      <button class="ftab active" data-tab="feat-agenda">
-        <i class="bi bi-calendar3"></i> Agenda
-      </button>
-      <button class="ftab" data-tab="feat-assinatura">
-        <i class="bi bi-gem"></i> Assinaturas
-      </button>
-      <button class="ftab" data-tab="feat-financeiro">
-        <i class="bi bi-bar-chart-line"></i> Financeiro
-      </button>
-      <button class="ftab" data-tab="feat-equipe">
-        <i class="bi bi-people"></i> Equipe
-      </button>
-    </div>
-
-    <!-- Panel: Agenda -->
-    <div class="feature-panel active" id="feat-agenda">
-      {% set agenda_feats = [
-        ("📅", "Agendamento Online 24/7",
-         "Link personalizado com a sua marca. Cliente acessa pelo Instagram, escolhe serviço, barbeiro e horário. Sem você mover um dedo.",
-         "Piloto Automático"),
-        ("🔔", "Confirmação Automática via WhatsApp",
-         "O Nivela envia lembrete 24h antes e 1h antes do horário. Cliente confirma em 1 clique. Taxa de no-show vai a zero.",
-         "Zero No-Show"),
-        ("🔄", "Reagendamento Inteligente",
-         "Cliente cancelou? O sistema abre o horário automaticamente e notifica a lista de espera. Sua agenda nunca fica vazia.",
-         "Agenda Sempre Cheia"),
-      ] %}
-      {% for ico, title, text, tag in agenda_feats %}
-      <div class="card card-gold-edge feat-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
-        <div class="feat-ico">{{ ico }}</div>
-        <h4 class="feat-title">{{ title }}</h4>
-        <p class="feat-text">{{ text }}</p>
-        <span class="feat-tag">{{ tag }}</span>
-      </div>
-      {% endfor %}
-    </div>
-
-    <!-- Panel: Assinaturas -->
-    <div class="feature-panel" id="feat-assinatura">
-      {% set assinatura_feats = [
-        ("💎", "Planos de Assinatura Mensais",
-         "Crie planos personalizados — Bronze, Prata, Gold. Cada assinante paga todo mês e tem cortes garantidos. Você tem receita garantida.",
-         "Receita Recorrente"),
-        ("🪙", "Controle de Créditos Automático",
-         "Cada serviço desconta automaticamente do saldo do cliente. Sem confusão, sem cliente reclamando, sem controle manual.",
-         "100% Automático"),
-        ("📊", "Relatório de Retenção",
-         "Veja quais assinantes estão sumindo antes de cancelarem. Tome ação antes de perder o cliente definitivamente.",
-         "Retenção Preditiva"),
-      ] %}
-      {% for ico, title, text, tag in assinatura_feats %}
-      <div class="card card-gold-edge feat-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
-        <div class="feat-ico">{{ ico }}</div>
-        <h4 class="feat-title">{{ title }}</h4>
-        <p class="feat-text">{{ text }}</p>
-        <span class="feat-tag">{{ tag }}</span>
-      </div>
-      {% endfor %}
-    </div>
-
-    <!-- Panel: Financeiro -->
-    <div class="feature-panel" id="feat-financeiro">
-      {% set fin_feats = [
-        ("📈", "Dashboard em Tempo Real",
-         "Faturamento do dia, semana e mês na tela do celular. Sem esperar fim de mês para saber se foi bom ou ruim.",
-         "Visão Completa"),
-        ("💰", "Fluxo de Caixa Automatizado",
-         "Entradas e saídas registradas automaticamente. Saiba exatamente quanto sobra todo mês, sem planilha.",
-         "Controle Total"),
-        ("🧾", "Relatório de Comissões",
-         "Cada barbeiro tem suas comissões calculadas automaticamente, por serviço e por período. Fim das discussões.",
-         "Sem Conflito"),
-      ] %}
-      {% for ico, title, text, tag in fin_feats %}
-      <div class="card card-gold-edge feat-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
-        <div class="feat-ico">{{ ico }}</div>
-        <h4 class="feat-title">{{ title }}</h4>
-        <p class="feat-text">{{ text }}</p>
-        <span class="feat-tag">{{ tag }}</span>
-      </div>
-      {% endfor %}
-    </div>
-
-    <!-- Panel: Equipe -->
-    <div class="feature-panel" id="feat-equipe">
-      {% set equipe_feats = [
-        ("👥", "Multi-Barbeiros",
-         "Cada profissional tem sua própria agenda, acesso separado e comissões individuais. Escale sua equipe sem bagunça.",
-         "Equipe Organizada"),
-        ("🏪", "Multi-Unidades",
-         "Abriu uma segunda unidade? Gerencie tudo de um único painel. Relatórios consolidados por unidade e no geral.",
-         "Expansão Facilitada"),
-        ("🔐", "Controle de Permissões",
-         "Defina o que cada colaborador pode ver e fazer no sistema. O dono tem visão total, o barbeiro só a sua agenda.",
-         "Segurança Total"),
-      ] %}
-      {% for ico, title, text, tag in equipe_feats %}
-      <div class="card card-gold-edge feat-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 80 }}">
-        <div class="feat-ico">{{ ico }}</div>
-        <h4 class="feat-title">{{ title }}</h4>
-        <p class="feat-text">{{ text }}</p>
-        <span class="feat-tag">{{ tag }}</span>
-      </div>
-      {% endfor %}
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ================================================================
-     DEMO BLOCKS  ← Adicione seus vídeos/screenshots aqui
-     ================================================================ -->
-<section id="demo" class="section">
-  <div class="wrap">
-
-    <div class="text-center mb-5" data-aos="fade-up">
-      <div class="gl mx-auto d-block"></div>
-      <p class="eyebrow mb-3">Veja em Ação</p>
-      <h2 class="section-title">Interface que<br><span class="t-gold">você vai amar usar</span></h2>
-      <p class="t-muted mt-3" style="max-width:480px;margin:12px auto 0;font-size:.95rem;">
-        Demonstrações e capturas de tela do sistema serão exibidas aqui.
-      </p>
-    </div>
-
-    <!-- Demo row 1 -->
-    <div class="demo-grid mb-4" data-aos="fade-up" data-aos-delay="80">
-
-      <div class="demo-block">
-        <div class="demo-block-inner">
-          <div class="demo-block-ico">📅</div>
-          <div class="demo-block-title">Demo — Agenda Online</div>
-          <div class="demo-block-sub">Captura de tela ou vídeo da tela de agendamento do cliente.</div>
-          <div class="demo-placeholder">[ Screenshot / Vídeo ]</div>
+        <div class="cards-3">
+          <article class="card">
+            <div class="icon"><i class="bi bi-person-x"></i></div>
+            <h3>Cliente marca e some</h3>
+            <p>Horário bloqueado, cadeira vazia e dinheiro indo embora. Com confirmação, agenda e fila, você ocupa melhor o dia.</p>
+            <div class="loss"><i class="bi bi-exclamation-triangle"></i> Até R$1.600/mês perdidos</div>
+          </article>
+          <article class="card">
+            <div class="icon"><i class="bi bi-journal-text"></i></div>
+            <h3>Financeiro no caderno</h3>
+            <p>Você vende, paga comissão, compra produto e no fim não sabe quanto sobrou. O Nivela mostra o caixa sem adivinhação.</p>
+            <div class="loss"><i class="bi bi-exclamation-triangle"></i> Lucro invisível não cresce</div>
+          </article>
+          <article class="card">
+            <div class="icon"><i class="bi bi-box-seam"></i></div>
+            <h3>Produto some da prateleira</h3>
+            <p>Pomada, gel e shampoo vendem, mas ninguém baixa estoque. O sistema avisa quando está acabando.</p>
+            <div class="loss"><i class="bi bi-exclamation-triangle"></i> Venda perdida por falta de controle</div>
+          </article>
         </div>
       </div>
+    </section>
 
-      <div class="demo-block">
-        <div class="demo-block-inner">
-          <div class="demo-block-ico">📊</div>
-          <div class="demo-block-title">Demo — Dashboard Financeiro</div>
-          <div class="demo-block-sub">Gráficos de faturamento, fluxo de caixa e resumo do mês.</div>
-          <div class="demo-placeholder">[ Screenshot / Vídeo ]</div>
+    <section class="section section-alt">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="eyebrow">Antes e depois</div>
+          <h2 class="section-title">A diferença é parar de tocar tudo no improviso.</h2>
         </div>
-      </div>
-
-      <div class="demo-block">
-        <div class="demo-block-inner">
-          <div class="demo-block-ico">💎</div>
-          <div class="demo-block-title">Demo — Gestão de Planos</div>
-          <div class="demo-block-sub">Tela de criação e controle de planos de assinatura.</div>
-          <div class="demo-placeholder">[ Screenshot / Vídeo ]</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Demo row 2 — banner largo -->
-    <div data-aos="fade-up" data-aos-delay="160">
-      <div class="demo-block demo-block-large" style="display:flex;flex-direction:column;">
-        <div class="demo-block-inner" style="flex-direction:row;align-items:center;gap:24px;flex-wrap:wrap;">
-          <div style="flex:1;min-width:220px;">
-            <div class="demo-block-ico">🎬</div>
-            <div class="demo-block-title" style="font-size:1.15rem;">Demo — Vídeo Tour Completo</div>
-            <div class="demo-block-sub">Um walkthrough completo do Nivela em menos de 2 minutos. Mostre aqui o vídeo principal de demonstração do produto.</div>
+        <div class="compare">
+          <div class="compare-col bad">
+            <h3>Sem o Nivela</h3>
+            <ul>
+              <li><i class="bi bi-x-lg"></i> Agenda perdida no WhatsApp</li>
+              <li><i class="bi bi-x-lg"></i> Cliente de fila esquecido</li>
+              <li><i class="bi bi-x-lg"></i> Caixa fechado na mão</li>
+              <li><i class="bi bi-x-lg"></i> Estoque sem alerta</li>
+              <li><i class="bi bi-x-lg"></i> Comissão calculada no chute</li>
+            </ul>
+            <div class="compare-result">Resultado: muito movimento, pouco controle.</div>
           </div>
-          <div class="demo-placeholder" style="flex:2;min-width:220px;min-height:120px;">[ Embed YouTube / Vimeo ]</div>
+          <div class="compare-col good">
+            <h3>Com o Nivela</h3>
+            <ul>
+              <li><i class="bi bi-check-lg"></i> Agenda pública e organizada</li>
+              <li><i class="bi bi-check-lg"></i> Fila presencial com status</li>
+              <li><i class="bi bi-check-lg"></i> Caixa diário com abertura e fechamento</li>
+              <li><i class="bi bi-check-lg"></i> Produtos com estoque mínimo</li>
+              <li><i class="bi bi-check-lg"></i> Planos recorrentes e créditos</li>
+            </ul>
+            <div class="compare-result">Resultado: a barbearia trabalha mais redonda.</div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
-  </div>
-</section>
-
-
-<!-- ================================================================
-     PRICING
-     ================================================================ -->
-<section id="pricing" class="section">
-  <div class="wrap">
-
-    <div class="text-center mb-5" data-aos="fade-up">
-      <div class="gl mx-auto d-block"></div>
-      <p class="eyebrow mb-3">Planos e Preços</p>
-      <h2 class="section-title">Escolha o plano<br><span class="t-gold">do seu negócio</span></h2>
-      <p class="t-muted mt-3" style="max-width:460px;margin:12px auto 24px;font-size:.92rem;">
-        Sem taxas escondidas. Cancele quando quiser. Todos os planos incluem 7 dias grátis.
-      </p>
-
-      <!-- Billing toggle -->
-      <div class="billing-toggle d-inline-flex align-items-center" data-aos="fade-up" data-aos-delay="100">
-        <span class="bt-label active" data-period="monthly">Mensal</span>
-        <div class="bt-switch" id="billingToggle">
-          <div class="bt-knob"></div>
+    <section id="demo" class="section">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="eyebrow">Por dentro do Nivela</div>
+          <h2 class="section-title">A rotina da barbearia organizada em telas simples.</h2>
+          <p class="section-sub">Demonstração guiada dos fluxos que sustentam a operação: agenda, fila, caixa, estoque, planos, equipe e relatórios em uma leitura direta.</p>
         </div>
-        <span class="bt-label" data-period="annual">Anual</span>
-        <span class="bt-discount">Economize 20%</span>
+
+        <div class="tabs">
+          <button class="tab active" type="button" data-tab="agenda"><i class="bi bi-calendar2-check"></i> Agenda</button>
+          <button class="tab" type="button" data-tab="fila"><i class="bi bi-people"></i> Fila</button>
+          <button class="tab" type="button" data-tab="caixa"><i class="bi bi-cash-stack"></i> Caixa</button>
+          <button class="tab" type="button" data-tab="estoque"><i class="bi bi-box-seam"></i> Estoque</button>
+          <button class="tab" type="button" data-tab="planos"><i class="bi bi-gem"></i> Planos</button>
+          <button class="tab" type="button" data-tab="equipe"><i class="bi bi-person-gear"></i> Equipe</button>
+          <button class="tab" type="button" data-tab="relatorios"><i class="bi bi-graph-up-arrow"></i> Relatórios</button>
+        </div>
+        <div class="demo-note"><i class="bi bi-shield-check"></i> Ambiente demonstrativo com dados de exemplo para preservar informações reais de clientes. A estrutura acompanha os fluxos centrais do produto.</div>
+
+        <div class="demo-panel active" id="agenda">
+          <div class="demo-stage">
+            <div class="demo-window" aria-label="Demonstração da agenda do Nivela">
+              <div class="demo-window-top">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="demo-url">nivela.app/agenda/hoje</span>
+              </div>
+              <div class="demo-app">
+                <aside class="demo-sidebar">
+                  <div class="demo-shop">Unidade Centro</div>
+                  <ul class="demo-menu">
+                    <li class="active"><i class="bi bi-calendar2-check"></i> Agenda</li>
+                    <li><i class="bi bi-people"></i> Fila</li>
+                    <li><i class="bi bi-receipt"></i> Pedidos</li>
+                    <li><i class="bi bi-cash-stack"></i> Caixa</li>
+                    <li><i class="bi bi-box-seam"></i> Estoque</li>
+                    <li><i class="bi bi-graph-up"></i> Relatórios</li>
+                  </ul>
+                </aside>
+                <div class="demo-content">
+                  <div class="demo-toolbar">
+                    <div class="demo-title">
+                      <h3>Agenda de hoje</h3>
+                      <p>Horários, barbeiros e status em uma visão só.</p>
+                    </div>
+                    <span class="demo-action"><i class="bi bi-plus-lg"></i> Novo horário</span>
+                  </div>
+                  <div class="demo-metrics">
+                    <div class="demo-metric"><span>Confirmados</span><strong>18</strong></div>
+                    <div class="demo-metric"><span>Encaixes</span><strong>3</strong></div>
+                    <div class="demo-metric"><span>No-show</span><strong>2%</strong></div>
+                  </div>
+                  <div class="demo-table">
+                    <div class="demo-row demo-head" style="--cols: 68px 1fr 104px 112px;"><span>Hora</span><span>Cliente</span><span>Barbeiro</span><span>Status</span></div>
+                    <div class="demo-row" style="--cols: 68px 1fr 104px 112px;"><strong>09:00</strong><span>João Luis<small>Degradê + barba</small></span><span>Marcos</span><b class="chip green">Confirmado</b></div>
+                    <div class="demo-row" style="--cols: 68px 1fr 104px 112px;"><strong>10:30</strong><span>Rafael S.<small>Corte clássico</small></span><span>Diego</span><b class="chip">Assinante</b></div>
+                    <div class="demo-row" style="--cols: 68px 1fr 104px 112px;"><strong>12:00</strong><span>Caio M.<small>Corte + pomada</small></span><span>Marcos</span><b class="chip neutral">Pendente</b></div>
+                    <div class="demo-row" style="--cols: 68px 1fr 104px 112px;"><strong>14:30</strong><span>Lucas P.<small>Barba completa</small></span><span>Andre</span><b class="chip green">Pago</b></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="demo-copy">
+              <div>
+                <div class="eyebrow">Agenda online</div>
+                <h3>O cliente marca sem travar seu WhatsApp.</h3>
+                <p>O fluxo mostra a rotina real: serviço, profissional, horário disponível, confirmação e acompanhamento do dia.</p>
+              </div>
+              <ul class="demo-points">
+                <li><i class="bi bi-check2-circle"></i> Link público para bio, Google e mensagens.</li>
+                <li><i class="bi bi-check2-circle"></i> Agenda por barbeiro, com intervalo e horário de funcionamento.</li>
+                <li><i class="bi bi-check2-circle"></i> Status claro para confirmado, pendente, pago e assinante.</li>
+              </ul>
+              <div class="demo-proof">
+                <div><strong>24/7</strong><span>agendamento online</span></div>
+                <div><strong>1 tela</strong><span>para controlar o dia</span></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="demo-panel" id="fila">
+          <div class="demo-stage">
+            <div class="demo-window" aria-label="Demonstração da fila presencial do Nivela">
+              <div class="demo-window-top">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="demo-url">nivela.app/fila</span>
+              </div>
+              <div class="demo-app">
+                <aside class="demo-sidebar">
+                  <div class="demo-shop">Unidade Centro</div>
+                  <ul class="demo-menu">
+                    <li><i class="bi bi-calendar2-check"></i> Agenda</li>
+                    <li class="active"><i class="bi bi-people"></i> Fila</li>
+                    <li><i class="bi bi-receipt"></i> Pedidos</li>
+                    <li><i class="bi bi-cash-stack"></i> Caixa</li>
+                    <li><i class="bi bi-box-seam"></i> Estoque</li>
+                    <li><i class="bi bi-graph-up"></i> Relatórios</li>
+                  </ul>
+                </aside>
+                <div class="demo-content">
+                  <div class="demo-toolbar">
+                    <div class="demo-title">
+                      <h3>Fila presencial</h3>
+                      <p>Chegou sem marcar? Entra, acompanha e vira atendimento.</p>
+                    </div>
+                    <span class="demo-action"><i class="bi bi-person-plus"></i> Adicionar</span>
+                  </div>
+                  <div class="demo-metrics">
+                    <div class="demo-metric"><span>Aguardando</span><strong>6</strong></div>
+                    <div class="demo-metric"><span>Em atendimento</span><strong>2</strong></div>
+                    <div class="demo-metric"><span>Tempo médio</span><strong>18m</strong></div>
+                  </div>
+                  <div class="demo-table">
+                    <div class="demo-row demo-head" style="--cols: 58px 1fr 120px 112px;"><span>Pos.</span><span>Cliente</span><span>Serviço</span><span>Status</span></div>
+                    <div class="demo-row" style="--cols: 58px 1fr 120px 112px;"><strong>01</strong><span>Bruno A.<small>Chegou 10:12</small></span><span>Corte</span><b class="chip green">Chamado</b></div>
+                    <div class="demo-row" style="--cols: 58px 1fr 120px 112px;"><strong>02</strong><span>Matheus R.<small>Preferência: Diego</small></span><span>Barba</span><b class="chip">Aguardando</b></div>
+                    <div class="demo-row" style="--cols: 58px 1fr 120px 112px;"><strong>03</strong><span>Henrique V.<small>Sem preferência</small></span><span>Completo</span><b class="chip neutral">Na fila</b></div>
+                    <div class="demo-row" style="--cols: 58px 1fr 120px 112px;"><strong>04</strong><span>Pedro L.<small>Cliente novo</small></span><span>Corte</span><b class="chip neutral">Na fila</b></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="demo-copy">
+              <div>
+                <div class="eyebrow">Fila sem bagunça</div>
+                <h3>Atendimento presencial sem grito, caderno ou esquecimento.</h3>
+                <p>A equipe vê quem chegou, quem foi chamado, quem está na cadeira e o que precisa ser concluído.</p>
+              </div>
+              <ul class="demo-points">
+                <li><i class="bi bi-check2-circle"></i> Cadastro rápido para cliente que chega sem horário.</li>
+                <li><i class="bi bi-check2-circle"></i> Ações de chamar, iniciar, cancelar e concluir atendimento.</li>
+                <li><i class="bi bi-check2-circle"></i> Atendimento concluído pode virar pedido no caixa.</li>
+              </ul>
+              <div class="demo-proof">
+                <div><strong>6</strong><span>clientes visíveis</span></div>
+                <div><strong>0</strong><span>fila perdida</span></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="demo-panel" id="caixa">
+          <div class="demo-stage">
+            <div class="demo-window" aria-label="Demonstração do caixa diário do Nivela">
+              <div class="demo-window-top">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="demo-url">nivela.app/caixa/diario</span>
+              </div>
+              <div class="demo-app">
+                <aside class="demo-sidebar">
+                  <div class="demo-shop">Unidade Centro</div>
+                  <ul class="demo-menu">
+                    <li><i class="bi bi-calendar2-check"></i> Agenda</li>
+                    <li><i class="bi bi-people"></i> Fila</li>
+                    <li><i class="bi bi-receipt"></i> Pedidos</li>
+                    <li class="active"><i class="bi bi-cash-stack"></i> Caixa</li>
+                    <li><i class="bi bi-box-seam"></i> Estoque</li>
+                    <li><i class="bi bi-graph-up"></i> Relatórios</li>
+                  </ul>
+                </aside>
+                <div class="demo-content">
+                  <div class="demo-toolbar">
+                    <div class="demo-title">
+                      <h3>Caixa aberto</h3>
+                      <p>Saldo esperado, pagamentos, despesas e fechamento.</p>
+                    </div>
+                    <span class="demo-action"><i class="bi bi-lock"></i> Fechar caixa</span>
+                  </div>
+                  <div class="demo-metrics">
+                    <div class="demo-metric"><span>Entradas</span><strong>R$ 2,8k</strong></div>
+                    <div class="demo-metric"><span>Despesas</span><strong>R$ 320</strong></div>
+                    <div class="demo-metric"><span>Diferença</span><strong>R$ 0</strong></div>
+                  </div>
+                  <div class="demo-table">
+                    <div class="demo-row demo-head" style="--cols: 78px 1fr 104px 100px;"><span>Hora</span><span>Lançamento</span><span>Forma</span><span>Valor</span></div>
+                    <div class="demo-row" style="--cols: 78px 1fr 104px 100px;"><strong>09:42</strong><span>Pedido #1842<small>Corte + barba</small></span><span>Pix</span><b class="chip green">R$ 85</b></div>
+                    <div class="demo-row" style="--cols: 78px 1fr 104px 100px;"><strong>10:18</strong><span>Venda balcão<small>Pomada Matte</small></span><span>Cartão</span><b class="chip green">R$ 42</b></div>
+                    <div class="demo-row" style="--cols: 78px 1fr 104px 100px;"><strong>12:00</strong><span>Despesas<small>Compra de insumo</small></span><span>Dinheiro</span><b class="chip red">- R$ 120</b></div>
+                    <div class="demo-row" style="--cols: 78px 1fr 104px 100px;"><strong>16:30</strong><span>Assinatura Gold<small>Renovação mensal</small></span><span>Pix</span><b class="chip green">R$ 149</b></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="demo-copy">
+              <div>
+                <div class="eyebrow">Caixa diário</div>
+                <h3>O dinheiro do dia fecha sem adivinhação.</h3>
+                <p>O caixa reúne vendas, serviços, formas de pagamento, despesas e saldo real para reduzir erro no fechamento.</p>
+              </div>
+              <ul class="demo-points">
+                <li><i class="bi bi-check2-circle"></i> Abertura e fechamento de caixa por dia.</li>
+                <li><i class="bi bi-check2-circle"></i> Registro de dinheiro, Pix, cartão e assinaturas.</li>
+                <li><i class="bi bi-check2-circle"></i> Diferença entre saldo esperado e saldo informado.</li>
+              </ul>
+              <div class="demo-proof">
+                <div><strong>R$ 0</strong><span>diferença no exemplo</span></div>
+                <div><strong>4</strong><span>formas de pagamento</span></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="demo-panel" id="estoque">
+          <div class="demo-stage">
+            <div class="demo-window" aria-label="Demonstração do estoque do Nivela">
+              <div class="demo-window-top">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="demo-url">nivela.app/estoque/produtos</span>
+              </div>
+              <div class="demo-app">
+                <aside class="demo-sidebar">
+                  <div class="demo-shop">Unidade Centro</div>
+                  <ul class="demo-menu">
+                    <li><i class="bi bi-calendar2-check"></i> Agenda</li>
+                    <li><i class="bi bi-people"></i> Fila</li>
+                    <li><i class="bi bi-receipt"></i> Pedidos</li>
+                    <li><i class="bi bi-cash-stack"></i> Caixa</li>
+                    <li class="active"><i class="bi bi-box-seam"></i> Estoque</li>
+                    <li><i class="bi bi-graph-up"></i> Relatórios</li>
+                  </ul>
+                </aside>
+                <div class="demo-content">
+                  <div class="demo-toolbar">
+                    <div class="demo-title">
+                      <h3>Produtos e alertas</h3>
+                      <p>Venda balcão, baixa de estoque e mínimo por produto.</p>
+                    </div>
+                    <span class="demo-action"><i class="bi bi-plus-lg"></i> Produto</span>
+                  </div>
+                  <div class="demo-metrics">
+                    <div class="demo-metric"><span>Itens ativos</span><strong>42</strong></div>
+                    <div class="demo-metric"><span>Baixo estoque</span><strong>5</strong></div>
+                    <div class="demo-metric"><span>Venda mês</span><strong>R$ 3,1k</strong></div>
+                  </div>
+                  <div class="demo-table">
+                    <div class="demo-row demo-head" style="--cols: 1fr 92px 96px 112px;"><span>Produto</span><span>Atual</span><span>Mínimo</span><span>Status</span></div>
+                    <div class="demo-row" style="--cols: 1fr 92px 96px 112px;"><span>Pomada Matte<small>Código PM-120</small></span><strong>4</strong><span>8</span><b class="chip red">Comprar</b></div>
+                    <div class="demo-row" style="--cols: 1fr 92px 96px 112px;"><span>Shampoo Barba<small>Código SH-90</small></span><strong>12</strong><span>6</span><b class="chip green">Ok</b></div>
+                    <div class="demo-row" style="--cols: 1fr 92px 96px 112px;"><span>Gel Fixador<small>Código GF-60</small></span><strong>2</strong><span>5</span><b class="chip red">Crítico</b></div>
+                    <div class="demo-row" style="--cols: 1fr 92px 96px 112px;"><span>Óleo para barba<small>Código OB-30</small></span><strong>9</strong><span>5</span><b class="chip green">Ok</b></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="demo-copy">
+              <div>
+                <div class="eyebrow">Estoque conectado</div>
+                <h3>Produto vendido baixa do estoque antes de virar prejuízo.</h3>
+                <p>A tela mostra giro de produto, estoque mínimo e alerta visual para compra, do jeito que a equipe entende rápido.</p>
+              </div>
+              <ul class="demo-points">
+                <li><i class="bi bi-check2-circle"></i> Controle de produto, código, preço e quantidade.</li>
+                <li><i class="bi bi-check2-circle"></i> Alerta quando o estoque passa do mínimo.</li>
+                <li><i class="bi bi-check2-circle"></i> Venda no balcão integrada ao caixa.</li>
+              </ul>
+              <div class="demo-proof">
+                <div><strong>5</strong><span>alertas ativos</span></div>
+                <div><strong>R$ 3,1k</strong><span>em produtos no mês</span></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="demo-panel" id="planos">
+          <div class="demo-stage">
+            <div class="demo-window" aria-label="Demonstração dos planos de assinatura do Nivela">
+              <div class="demo-window-top">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="demo-url">nivela.app/assinaturas</span>
+              </div>
+              <div class="demo-app">
+                <aside class="demo-sidebar">
+                  <div class="demo-shop">Unidade Centro</div>
+                  <ul class="demo-menu">
+                    <li><i class="bi bi-calendar2-check"></i> Agenda</li>
+                    <li><i class="bi bi-people"></i> Fila</li>
+                    <li><i class="bi bi-receipt"></i> Pedidos</li>
+                    <li><i class="bi bi-cash-stack"></i> Caixa</li>
+                    <li class="active"><i class="bi bi-gem"></i> Planos</li>
+                    <li><i class="bi bi-graph-up"></i> Relatórios</li>
+                  </ul>
+                </aside>
+                <div class="demo-content">
+                  <div class="demo-toolbar">
+                    <div class="demo-title">
+                      <h3>Assinaturas</h3>
+                      <p>Planos, créditos, vencimentos e receita previsível.</p>
+                    </div>
+                    <span class="demo-action"><i class="bi bi-gem"></i> Criar plano</span>
+                  </div>
+                  <div class="demo-metrics">
+                    <div class="demo-metric"><span>Assinantes</span><strong>47</strong></div>
+                    <div class="demo-metric"><span>Receita recorrente</span><strong>R$ 6,8k</strong></div>
+                    <div class="demo-metric"><span>Vencendo</span><strong>5</strong></div>
+                  </div>
+                  <div class="demo-table">
+                    <div class="demo-row demo-head" style="--cols: 1fr 112px 98px 112px;"><span>Cliente</span><span>Plano</span><span>Créditos</span><span>Status</span></div>
+                    <div class="demo-row" style="--cols: 1fr 112px 98px 112px;"><span>João Luis<small>Renova em 4 dias</small></span><strong>Gold</strong><span>3/4</span><b class="chip green">Ativo</b></div>
+                    <div class="demo-row" style="--cols: 1fr 112px 98px 112px;"><span>Rafael S.<small>Pix recorrente</small></span><strong>Prata</strong><span>1/2</span><b class="chip">Ativo</b></div>
+                    <div class="demo-row" style="--cols: 1fr 112px 98px 112px;"><span>Thiago C.<small>Cobrança pendente</small></span><strong>Gold</strong><span>0/4</span><b class="chip red">Vencendo</b></div>
+                    <div class="demo-row" style="--cols: 1fr 112px 98px 112px;"><span>Lucas P.<small>Novo assinante</small></span><strong>Bronze</strong><span>2/2</span><b class="chip green">Pago</b></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="demo-copy">
+              <div>
+                <div class="eyebrow">Receita recorrente</div>
+                <h3>Planos fazem o cliente voltar antes de você correr atrás.</h3>
+                <p>O sistema controla assinatura, créditos por ciclo, vencimento e renovação para dar previsibilidade ao mês.</p>
+              </div>
+              <ul class="demo-points">
+                <li><i class="bi bi-check2-circle"></i> Planos com serviços, produtos e créditos definidos.</li>
+                <li><i class="bi bi-check2-circle"></i> Saldo de créditos visível no atendimento.</li>
+                <li><i class="bi bi-check2-circle"></i> Renovação entrando no financeiro e no caixa.</li>
+              </ul>
+              <div class="demo-proof">
+                <div><strong>47</strong><span>assinantes ativos</span></div>
+                <div><strong>R$ 6,8k</strong><span>recorrente estimado</span></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="demo-panel" id="equipe">
+          <div class="demo-stage">
+            <div class="demo-window" aria-label="Demonstração da equipe e permissões do Nivela">
+              <div class="demo-window-top">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="demo-url">nivela.app/equipe</span>
+              </div>
+              <div class="demo-app">
+                <aside class="demo-sidebar">
+                  <div class="demo-shop">Unidade Centro</div>
+                  <ul class="demo-menu">
+                    <li><i class="bi bi-calendar2-check"></i> Agenda</li>
+                    <li><i class="bi bi-people"></i> Fila</li>
+                    <li><i class="bi bi-receipt"></i> Pedidos</li>
+                    <li><i class="bi bi-cash-stack"></i> Caixa</li>
+                    <li><i class="bi bi-box-seam"></i> Estoque</li>
+                    <li class="active"><i class="bi bi-person-gear"></i> Equipe</li>
+                  </ul>
+                </aside>
+                <div class="demo-content">
+                  <div class="demo-toolbar">
+                    <div class="demo-title">
+                      <h3>Equipe e permissões</h3>
+                      <p>Agenda por profissional e acesso conforme o cargo.</p>
+                    </div>
+                    <span class="demo-action"><i class="bi bi-person-plus"></i> Convidar</span>
+                  </div>
+                  <div class="demo-metrics">
+                    <div class="demo-metric"><span>Ativos</span><strong>8</strong></div>
+                    <div class="demo-metric"><span>Comissão mês</span><strong>R$ 4,2k</strong></div>
+                    <div class="demo-metric"><span>Perfis</span><strong>3</strong></div>
+                  </div>
+                  <div class="demo-table">
+                    <div class="demo-row demo-head" style="--cols: 1fr 112px 116px 112px;"><span>Profissional</span><span>Cargo</span><span>Comissão</span><span>Acesso</span></div>
+                    <div class="demo-row" style="--cols: 1fr 112px 116px 112px;"><span>Marcos Lima<small>Agenda cheia hoje</small></span><strong>Barbeiro</strong><span>40%</span><b class="chip">Agenda</b></div>
+                    <div class="demo-row" style="--cols: 1fr 112px 116px 112px;"><span>Ana Souza<small>Fecha caixa</small></span><strong>Gerente</strong><span>Fixo</span><b class="chip green">Admin</b></div>
+                    <div class="demo-row" style="--cols: 1fr 112px 116px 112px;"><span>Diego N.<small>Atende fila</small></span><strong>Barbeiro</strong><span>45%</span><b class="chip">Agenda</b></div>
+                    <div class="demo-row" style="--cols: 1fr 112px 116px 112px;"><span>Felipe R.<small>Em onboarding</small></span><strong>Auxiliar</strong><span>0%</span><b class="chip neutral">Limitado</b></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="demo-copy">
+              <div>
+                <div class="eyebrow">Gestão da equipe</div>
+                <h3>Cada pessoa vê o que precisa para trabalhar.</h3>
+                <p>O dono acompanha equipe, comissões e permissões sem entregar controle total para todo mundo.</p>
+              </div>
+              <ul class="demo-points">
+                <li><i class="bi bi-check2-circle"></i> Agenda individual por profissional.</li>
+                <li><i class="bi bi-check2-circle"></i> Perfis para barbeiro, gerente e administração.</li>
+                <li><i class="bi bi-check2-circle"></i> Comissão conectada ao atendimento e ao caixa.</li>
+              </ul>
+              <div class="demo-proof">
+                <div><strong>8</strong><span>usuários ativos</span></div>
+                <div><strong>3</strong><span>níveis de acesso</span></div>
+              </div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="demo-panel" id="relatorios">
+          <div class="demo-stage">
+            <div class="demo-window" aria-label="Demonstração dos relatórios do Nivela">
+              <div class="demo-window-top">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="demo-url">nivela.app/relatorios</span>
+              </div>
+              <div class="demo-app">
+                <aside class="demo-sidebar">
+                  <div class="demo-shop">Unidade Centro</div>
+                  <ul class="demo-menu">
+                    <li><i class="bi bi-calendar2-check"></i> Agenda</li>
+                    <li><i class="bi bi-people"></i> Fila</li>
+                    <li><i class="bi bi-receipt"></i> Pedidos</li>
+                    <li><i class="bi bi-cash-stack"></i> Caixa</li>
+                    <li><i class="bi bi-box-seam"></i> Estoque</li>
+                    <li class="active"><i class="bi bi-graph-up"></i> Relatórios</li>
+                  </ul>
+                </aside>
+                <div class="demo-content">
+                  <div class="demo-toolbar">
+                    <div class="demo-title">
+                      <h3>Resumo gerencial</h3>
+                      <p>Resultado por período, serviço, produto e profissional.</p>
+                    </div>
+                    <span class="demo-action"><i class="bi bi-download"></i> Exportar</span>
+                  </div>
+                  <div class="demo-metrics">
+                    <div class="demo-metric"><span>Faturamento</span><strong>R$ 38k</strong></div>
+                    <div class="demo-metric"><span>Ticket médio</span><strong>R$ 74</strong></div>
+                    <div class="demo-metric"><span>Retorno</span><strong>68%</strong></div>
+                  </div>
+                  <div class="demo-table">
+                    <div class="demo-row demo-head" style="--cols: 1fr 106px 112px 112px;"><span>Indicador</span><span>Atual</span><span>Anterior</span><span>Variação</span></div>
+                    <div class="demo-row" style="--cols: 1fr 106px 112px 112px;"><span>Serviços<small>Quantidade mensal</small></span><strong>514</strong><span>462</span><b class="chip green">+11%</b></div>
+                    <div class="demo-row" style="--cols: 1fr 106px 112px 112px;"><span>Produtos<small>Venda balcão</small></span><strong>R$ 3,1k</strong><span>R$ 2,4k</span><b class="chip green">+29%</b></div>
+                    <div class="demo-row" style="--cols: 1fr 106px 112px 112px;"><span>No-show<small>Agenda online</small></span><strong>2%</strong><span>9%</span><b class="chip green">-7 pts</b></div>
+                    <div class="demo-row" style="--cols: 1fr 106px 112px 112px;"><span>Assinaturas<small>Receita recorrente</small></span><strong>R$ 6,8k</strong><span>R$ 5,9k</span><b class="chip green">+15%</b></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside class="demo-copy">
+              <div>
+                <div class="eyebrow">Decisão com número</div>
+                <h3>Você enxerga onde a barbearia ganha e onde vaza dinheiro.</h3>
+                <p>Os relatórios juntam agenda, caixa, produtos, assinaturas e equipe para mostrar o resultado de verdade.</p>
+              </div>
+              <ul class="demo-points">
+                <li><i class="bi bi-check2-circle"></i> Leitura por período, serviço, barbeiro e produto.</li>
+                <li><i class="bi bi-check2-circle"></i> Indicadores de retorno, no-show e ticket médio.</li>
+                <li><i class="bi bi-check2-circle"></i> Exportação para conferir ou apresentar os números.</li>
+              </ul>
+              <div class="demo-proof">
+                <div><strong>68%</strong><span>retorno de clientes</span></div>
+                <div><strong>R$ 74</strong><span>ticket médio</span></div>
+              </div>
+            </aside>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Plans -->
-    <div class="plans-grid" data-aos="fade-up" data-aos-delay="120">
-
-      {# ── PLANO 1: SOLO ──────────────────────────────────────── #}
-      <div class="card plan-card">
-        <div class="plan-header">
-          <div class="plan-tier">Solo</div>
-          <h3 class="plan-name">Solo</h3>
-          <p class="plan-tagline">Para o barbeiro autônomo que quer sair do WhatsApp e ter controle do negócio.</p>
+    <section id="pricing" class="section section-alt">
+      <div class="wrap">
+        <div class="pricing-head">
+          <div class="section-head" style="margin-bottom:0;">
+            <div class="eyebrow">Planos</div>
+            <h2 class="section-title">Comece simples. Suba quando a barbearia crescer.</h2>
+            <p class="section-sub">Escolha o plano conforme o momento da barbearia. A estrutura acompanha desde o barbeiro solo até a gestão de equipe, financeiro e operação em rede.</p>
+          </div>
+          <div class="billing-toggle">
+            <button class="bt-label" type="button" data-billing="monthly">Mensal</button>
+            <button class="bt-label active" type="button" data-billing="annual">Anual</button>
+            <span class="billing-note">10% no anual</span>
+          </div>
         </div>
-        <div class="plan-price-wrap">
+
+        <div class="plans-grid">
+          <article class="plan">
+            <div class="plan-top">
+              <div class="plan-tier">Solo</div>
+              <h3 class="plan-name">Solo</h3>
+              <p class="plan-desc">Para barbeiro autônomo sair do WhatsApp e controlar agenda, clientes e dinheiro.</p>
+              <div class="plan-trial"><i class="bi bi-gift"></i> 7 dias de cortesia para testar com calma</div>
+            </div>
+            <div class="plan-price">
+              <div class="amount"><strong data-monthly-price="R$ 38" data-annual-price="R$ 34,20">R$ 34,20</strong><span data-monthly-period="/mês" data-annual-period="/mês no anual">/mês no anual</span></div>
+              <div class="price-note annual" data-monthly-note="Plano mensal sem fidelidade." data-annual-note="R$ 410/ano em uma cobrança anual.">R$ 410/ano em uma cobrança anual.</div>
+            </div>
+            <div class="plan-body">
+              <div class="feature-title">Inclui</div>
+              <ul class="plan-list">
+                <li><i class="bi bi-check-lg"></i> 1 barbeiro ativo</li>
+                <li><i class="bi bi-check-lg"></i> Agenda online com link público</li>
+                <li><i class="bi bi-check-lg"></i> Cadastro de clientes e serviços</li>
+                <li><i class="bi bi-check-lg"></i> Pedidos e financeiro básico</li>
+                <li><i class="bi bi-check-lg"></i> Acesso pelo celular, com atalho na tela inicial</li>
+                <li class="off"><i class="bi bi-dash"></i> Sem fila presencial avançada</li>
+              </ul>
+              <div class="plan-cta"><a href="{{ url_for('site.plano_comercial', plano='solo') }}" class="btn btn-ghost">Começar agora</a></div>
+            </div>
+          </article>
+
+          <article class="plan featured">
+            <div class="plan-badge">Mais escolhido</div>
+            <div class="plan-top">
+              <div class="plan-tier">Equipe</div>
+              <h3 class="plan-name">Equipe</h3>
+              <p class="plan-desc">Para barbearia com mais profissionais e atendimento presencial mais movimentado.</p>
+              <div class="plan-trial"><i class="bi bi-gift"></i> 7 dias de cortesia para sentir na rotina</div>
+            </div>
+            <div class="plan-price">
+              <div class="amount"><strong data-monthly-price="R$ 89" data-annual-price="R$ 80,90">R$ 80,90</strong><span data-monthly-period="/mês" data-annual-period="/mês no anual">/mês no anual</span></div>
+              <div class="price-note annual" data-monthly-note="Plano mensal sem fidelidade." data-annual-note="R$ 961/ano em uma cobrança anual.">R$ 961/ano em uma cobrança anual.</div>
+            </div>
+            <div class="plan-body">
+              <div class="feature-title">Inclui</div>
+              <ul class="plan-list">
+                <li><i class="bi bi-check-lg"></i> Tudo do Solo</li>
+                <li><i class="bi bi-check-lg"></i> Até 5 barbeiros ativos</li>
+                <li><i class="bi bi-check-lg"></i> Agenda por profissional</li>
+                <li><i class="bi bi-check-lg"></i> Fila presencial: chamar, iniciar e concluir</li>
+                <li><i class="bi bi-check-lg"></i> Comissões por barbeiro</li>
+                <li><i class="bi bi-check-lg"></i> Usuários e permissões básicas</li>
+              </ul>
+              <div class="plan-cta"><a href="{{ url_for('site.plano_comercial', plano='equipe') }}" class="btn btn-gold">Ativar gestão de equipe</a></div>
+            </div>
+          </article>
+
+          <article class="plan">
+            <div class="plan-top">
+              <div class="plan-tier">Profissional</div>
+              <h3 class="plan-name">Profissional</h3>
+              <p class="plan-desc">Para barbearia maior, com uma unidade, que precisa enxergar caixa, estoque e recorrência.</p>
+              <div class="plan-trial"><i class="bi bi-gift"></i> 7 dias de cortesia para avaliar sem pressa</div>
+            </div>
+            <div class="plan-price">
+              <div class="amount"><strong data-monthly-price="R$ 148" data-annual-price="R$ 133">R$ 133</strong><span data-monthly-period="/mês" data-annual-period="/mês no anual">/mês no anual</span></div>
+              <div class="price-note annual" data-monthly-note="Plano mensal sem fidelidade." data-annual-note="R$ 1.596/ano em uma cobrança anual.">R$ 1.596/ano em uma cobrança anual.</div>
+            </div>
+            <div class="plan-body">
+              <div class="feature-title">Inclui</div>
+              <ul class="plan-list">
+                <li><i class="bi bi-check-lg"></i> Tudo do Equipe</li>
+                <li><i class="bi bi-check-lg"></i> Até 10 barbeiros ativos</li>
+                <li><i class="bi bi-check-lg"></i> Caixa diário com abertura, fechamento e despesas</li>
+                <li><i class="bi bi-check-lg"></i> Produtos, estoque mínimo e alertas</li>
+                <li><i class="bi bi-check-lg"></i> Planos recorrentes com créditos</li>
+                <li><i class="bi bi-check-lg"></i> Novidade: emissão de notas pelo sistema</li>
+                <li><i class="bi bi-check-lg"></i> Relatórios para enviar ao contador em planilha ou PDF</li>
+              </ul>
+              <div class="plan-cta"><a href="{{ url_for('site.plano_comercial', plano='profissional') }}" class="btn btn-ghost">Expanda agora!</a></div>
+            </div>
+          </article>
+        </div>
+
+        <article class="plan fiscal-plan fiscal-spotlight">
+          <div class="fiscal-badge">Operação multiunidade</div>
+          <div class="plan-top">
+            <div class="plan-tier">Rede e filiais</div>
+            <h3 class="plan-name">Enterprise</h3>
+            <p class="plan-desc">Para dono que já pensa como grupo: mais de uma barbearia, gerentes por unidade, financeiro comparável e padrão de operação sem depender de mensagem solta.</p>
+            <div class="plan-trial"><i class="bi bi-gift"></i> 7 dias de cortesia para mapear a operação</div>
+            <div class="fiscal-note">Uma camada para empresários que precisam enxergar a rede com frieza: agenda, fila, caixa, pedidos, planos, comissões, estoque, contas e relatórios trabalhando com a mesma lógica em cada filial.</div>
+          </div>
           <div class="plan-price">
-            <span class="plan-currency">R$</span>
-            <span class="plan-amount" data-monthly="39" data-annual="31">39</span>
-            <span class="plan-period">/mês</span>
+            <div class="amount"><strong>Sob consulta</strong></div>
+            <div class="price-note">Proposta definida conforme número de unidades, volume operacional, permissões e nível de acompanhamento necessário.</div>
           </div>
-          <div class="plan-annual-note" style="display:none;color:var(--text-3);font-size:.78rem;">
-            Cobrado anualmente — R$ 372/ano
+          <div class="plan-body">
+            <div class="feature-title">Inclui</div>
+            <ul class="plan-list">
+              <li><i class="bi bi-check-lg"></i> Tudo do Profissional</li>
+              <li><i class="bi bi-check-lg"></i> Estrutura para rede, filiais e gestores por unidade</li>
+              <li><i class="bi bi-check-lg"></i> Financeiro com contas, despesas, recebimentos e fluxo de caixa</li>
+              <li><i class="bi bi-check-lg"></i> Relatórios por período, serviço, produto, profissional e comissão</li>
+              <li><i class="bi bi-check-lg"></i> Novidade: emissão de notas pelo sistema</li>
+              <li><i class="bi bi-check-lg"></i> Exportação de relatórios para conferência e contabilidade</li>
+              <li><i class="bi bi-check-lg"></i> Permissões para dono, gerência, atendimento e operação</li>
+              <li><i class="bi bi-check-lg"></i> Padronização de agenda, fila, pedidos, estoque e planos recorrentes</li>
+              <li><i class="bi bi-check-lg"></i> Implantação assistida para mapear unidades e rotina da rede</li>
+            </ul>
+            <div class="plan-cta"><a href="{{ url_for('site.plano_comercial', plano='enterprise') }}" class="btn btn-ghost">Fale com um consultor</a></div>
           </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="eyebrow">Controles verificáveis</div>
+          <h2 class="section-title">O dono confia porque consegue conferir.</h2>
+          <p class="section-sub">A credibilidade do Nivela vem da trilha operacional: status, caixa, permissões e histórico ficam organizados para reduzir decisão no escuro.</p>
         </div>
 
-        <div class="plan-features">
-          <div class="plan-feature-group">
-            <div class="plan-feature-group-title">Barbeiros</div>
-            <ul class="plan-list">
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> <strong>1 barbeiro</strong> ativo</li>
-            </ul>
-          </div>
-          <div class="plan-feature-group">
-            <div class="plan-feature-group-title">Funcionalidades</div>
-            <ul class="plan-list">
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Agendamento online com link personalizado</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Confirmação automática via WhatsApp</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Controle financeiro básico</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Histórico de clientes</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Planos de assinatura</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Controle de créditos</li>
-              <li class="off"><span class="ck-off"><i class="bi bi-dash"></i></span> Multi-unidades</li>
-            </ul>
-          </div>
-          <div class="plan-feature-group">
-            <div class="plan-feature-group-title">Suporte</div>
-            <ul class="plan-list">
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Suporte por e-mail (48h)</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Base de conhecimento</li>
-            </ul>
-          </div>
-        </div>
+        <div class="testi-grid">
+          <article class="card testi-card">
+            <div class="evidence-label"><i class="bi bi-calendar2-check"></i> Agenda e fila</div>
+            <p class="testi-text">Cada atendimento passa por status claros: reservado, confirmado, em fila, chamado, em atendimento e concluído. A equipe deixa de depender de memória e trabalha na mesma leitura do dia.</p>
+            <div class="testi-result"><i class="bi bi-check2-circle"></i> Histórico por cliente e profissional</div>
+            <div class="testi-author">
+              <div class="testi-avatar"><i class="bi bi-list-check"></i></div>
+              <div>
+                <div class="testi-name">Fluxo rastreável</div>
+                <div class="testi-role">Revisão do que aconteceu no atendimento</div>
+              </div>
+            </div>
+          </article>
 
-        <div class="plan-cta">
-          <a href="#" class="btn btn-ghost">
-            <i class="bi bi-arrow-right"></i> Começar grátis
-          </a>
+          <article class="card testi-card">
+            <div class="evidence-label"><i class="bi bi-cash-stack"></i> Caixa e pedidos</div>
+            <p class="testi-text">Serviços, produtos, assinaturas, formas de pagamento e despesas entram no mesmo fechamento. O dono compara saldo esperado e saldo informado sem montar controle paralelo.</p>
+            <div class="testi-result"><i class="bi bi-check2-circle"></i> Fechamento com conferência</div>
+            <div class="testi-author">
+              <div class="testi-avatar"><i class="bi bi-receipt"></i></div>
+              <div>
+                <div class="testi-name">Caixa auditável</div>
+                <div class="testi-role">Movimentações por tipo, origem e forma</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card testi-card">
+            <div class="evidence-label"><i class="bi bi-shield-lock"></i> Permissões</div>
+            <p class="testi-text">Acesso de dono, gerente, barbeiro e auxiliar pode ser separado por função. Quem atende vê o necessário; quem administra mantém visão da operação.</p>
+            <div class="testi-result"><i class="bi bi-check2-circle"></i> Acesso por função</div>
+            <div class="testi-author">
+              <div class="testi-avatar"><i class="bi bi-person-gear"></i></div>
+              <div>
+                <div class="testi-name">Operação protegida</div>
+                <div class="testi-role">Controle sem expor áreas sensíveis</div>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
+    </section>
 
-      {# ── PLANO 2: BARBEARIA (FEATURED) ─────────────────────── #}
-      <div class="card plan-card featured">
-        <div class="plan-badge">✦ Mais Popular</div>
-        <div class="plan-header plan-featured-header">
-          <div class="plan-tier">Barbearia</div>
-          <h3 class="plan-name">Barbearia</h3>
-          <p class="plan-tagline">Para barbearias com equipe que querem crescer com organização e receita recorrente.</p>
+    <section id="faq" class="section">
+      <div class="wrap">
+        <div class="section-head center">
+          <div class="eyebrow">Dúvidas frequentes</div>
+          <h2 class="section-title">Talvez não falte esforço. Falte enxergar o que está vazando.</h2>
+          <p class="section-sub">Tire as dúvidas antes de testar. A ideia não é trocar sua rotina por complicação; é mostrar onde agenda, caixa, equipe e cliente podem ficar mais claros sem pesar no dia.</p>
         </div>
-        <div class="plan-price-wrap">
-          <div class="plan-price">
-            <span class="plan-currency">R$</span>
-            <span class="plan-amount" data-monthly="59" data-annual="52">59</span>
-            <span class="plan-period">/mês</span>
+        <div class="faq-wrap">
+          <div class="faq-item open">
+            <button class="faq-q" type="button">Posso testar antes de decidir?<i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div>Sim. Você pode testar por 7 dias e sentir o Nivela na rotina antes de assumir compromisso. A intenção é mostrar valor na prática, sem pressão desnecessária.</div></div>
           </div>
-          <div class="plan-annual-note" style="display:none;color:var(--text-3);font-size:.78rem;">
-            Cobrado anualmente — R$ 624/ano
+          <div class="faq-item">
+            <button class="faq-q" type="button">O Nivela é só agenda online?<i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div>Não. Agenda é só uma parte. O Nivela também tem fila presencial, pedidos, caixa diário, financeiro, estoque, planos de assinatura e controle de equipe.</div></div>
           </div>
-        </div>
-
-        <div class="plan-features">
-          <div class="plan-feature-group">
-            <div class="plan-feature-group-title">Barbeiros</div>
-            <ul class="plan-list">
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> <strong>Até 5 barbeiros</strong> ativos</li>
-            </ul>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Meus clientes precisam baixar aplicativo?<i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div>Não. O cliente abre o link de agendamento pelo navegador. A equipe também pode acessar pelo celular e salvar um atalho na tela inicial, com aparência de aplicativo.</div></div>
           </div>
-          <div class="plan-feature-group">
-            <div class="plan-feature-group-title">Funcionalidades</div>
-            <ul class="plan-list">
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Tudo do plano Solo</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> <strong>Planos de assinatura</strong> para clientes</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> <strong>Controle automático de créditos</strong></li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Dashboard financeiro avançado</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Relatório de comissões por barbeiro</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Notificações WhatsApp automáticas</li>
-              <li class="off"><span class="ck-off"><i class="bi bi-dash"></i></span> Multi-unidades</li>
-            </ul>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Dá para atender quem chega sem marcar?<i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div>Sim. A fila presencial serve para isso. Você coloca o cliente na fila, chama, inicia o atendimento e conclui quando terminar.</div></div>
           </div>
-          <div class="plan-feature-group">
-            <div class="plan-feature-group-title">Suporte</div>
-            <ul class="plan-list">
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> <strong>Suporte via WhatsApp</strong> (resposta em horas)</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Onboarding guiado</li>
-            </ul>
+          <div class="faq-item">
+            <button class="faq-q" type="button">O sistema ajuda no fechamento do caixa?<i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div>Sim. No plano certo, você abre o caixa, registra despesas, acompanha saldo esperado e fecha comparando com o valor real.</div></div>
           </div>
-        </div>
-
-        <div class="plan-cta">
-          <a href="#" class="btn btn-gold">
-            <i class="bi bi-lightning-charge-fill"></i> Começar grátis
-          </a>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Consigo controlar produtos?<i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div>Sim. Você cadastra produtos, controla estoque, define estoque mínimo e recebe alerta quando estiver acabando.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Como funcionam os planos de assinatura?<i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div>Você cria planos com serviços ou produtos incluídos, define créditos por ciclo e acompanha renovações para ter receita mais previsível.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Posso controlar o que cada funcionário vê?<i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div>Sim. O sistema tem usuários e permissões. O dono pode liberar acessos diferentes para barbeiro, gerente e administração.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">É difícil começar?<i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div>Não. O sistema tem onboarding inicial e ajuda por tela. Você pode começar com dados básicos ou com a base zerada.</div></div>
+          </div>
         </div>
       </div>
+    </section>
 
-      {# ── PLANO 3: ELITE ─────────────────────────────────────── #}
-      <div class="card plan-card">
-        <div class="plan-header">
-          <div class="plan-tier">Elite</div>
-          <h3 class="plan-name">Elite</h3>
-          <p class="plan-tagline">Para redes de barbearias e operações de alto volume que exigem o máximo do sistema.</p>
-        </div>
-        <div class="plan-price-wrap">
-          <div class="plan-price">
-            <span class="plan-currency">R$</span>
-            <span class="plan-amount" data-monthly="86" data-annual="81">86</span>
-            <span class="plan-period">/mês</span>
-          </div>
-          <div class="plan-annual-note" style="display:none;color:var(--text-3);font-size:.78rem;">
-            Cobrado anualmente — R$ 972/ano
-          </div>
-        </div>
-
-        <div class="plan-features">
-          <div class="plan-feature-group">
-            <div class="plan-feature-group-title">Barbeiros</div>
-            <ul class="plan-list">
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> <strong>Barbeiros ilimitados</strong></li>
-            </ul>
-          </div>
-          <div class="plan-feature-group">
-            <div class="plan-feature-group-title">Funcionalidades</div>
-            <ul class="plan-list">
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Tudo do plano Barbearia</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> <strong>Multi-unidades</strong> com dashboard consolidado</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Controle de permissões avançado</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Relatórios gerenciais avançados</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> API para integrações externas</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> White-label (sua marca no app)</li>
-            </ul>
-          </div>
-          <div class="plan-feature-group">
-            <div class="plan-feature-group-title">Suporte</div>
-            <ul class="plan-list">
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> <strong>Suporte prioritário 24/7</strong></li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Gerente de conta dedicado</li>
-              <li><span class="ck"><i class="bi bi-check-lg"></i></span> Onboarding personalizado</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="plan-cta">
-          <a href="#" class="btn btn-ghost">
-            <i class="bi bi-arrow-right"></i> Expanda já
-          </a>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Guarantee note -->
-    <div class="text-center mt-4" data-aos="fade-up">
-      <p style="font-size:.82rem;color:var(--text-3);">
-        <i class="bi bi-shield-check" style="color:var(--gold);"></i>
-        Garantia de 30 dias — não gostou, devolvemos 100% do valor sem perguntas.
-        &nbsp;·&nbsp; ✓ Cancele quando quiser
-      </p>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ================================================================
-     COMPARISON TABLE
-     ================================================================ -->
-<section id="comparison" class="section-sm">
-  <div class="wrap">
-    <div class="text-center mb-4" data-aos="fade-up">
-      <p class="eyebrow">Comparativo Completo</p>
-    </div>
-    <div style="overflow-x:auto;" data-aos="fade-up" data-aos-delay="60">
-      <table class="comparison-table" style="min-width:600px;">
-        <thead>
-          <tr>
-            <th style="width:40%">Funcionalidade</th>
-            <th>Solo</th>
-            <th class="featured-col">Barbearia ✦</th>
-            <th>Elite</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="group-row"><td colspan="4">Agendamento</td></tr>
-          <tr><td>Agendamento online</td><td><span class="ck-yes">✓</span></td><td class="featured-col"><span class="ck-yes">✓</span></td><td><span class="ck-yes">✓</span></td></tr>
-          <tr><td>Confirmação WhatsApp automática</td><td><span class="ck-yes">✓</span></td><td class="featured-col"><span class="ck-yes">✓</span></td><td><span class="ck-yes">✓</span></td></tr>
-          <tr><td>Lista de espera automática</td><td><span class="ck-no">—</span></td><td class="featured-col"><span class="ck-yes">✓</span></td><td><span class="ck-yes">✓</span></td></tr>
-
-          <tr class="group-row"><td colspan="4">Planos &amp; Créditos</td></tr>
-          <tr><td>Planos de assinatura</td><td><span class="ck-no">—</span></td><td class="featured-col"><span class="ck-yes">✓</span></td><td><span class="ck-yes">✓</span></td></tr>
-          <tr><td>Controle de créditos automático</td><td><span class="ck-no">—</span></td><td class="featured-col"><span class="ck-yes">✓</span></td><td><span class="ck-yes">✓</span></td></tr>
-
-          <tr class="group-row"><td colspan="4">Equipe &amp; Estrutura</td></tr>
-          <tr><td>Barbeiros ativos</td><td>1</td><td class="featured-col">Até 5</td><td>Ilimitado</td></tr>
-          <tr><td>Multi-unidades</td><td><span class="ck-no">—</span></td><td class="featured-col"><span class="ck-no">—</span></td><td><span class="ck-yes">✓</span></td></tr>
-          <tr><td>Controle de permissões</td><td><span class="ck-no">—</span></td><td class="featured-col"><span class="ck-part">Básico</span></td><td><span class="ck-yes">Avançado</span></td></tr>
-          <tr><td>White-label</td><td><span class="ck-no">—</span></td><td class="featured-col"><span class="ck-no">—</span></td><td><span class="ck-yes">✓</span></td></tr>
-
-          <tr class="group-row"><td colspan="4">Suporte</td></tr>
-          <tr><td>Canal de suporte</td><td>E-mail</td><td class="featured-col">WhatsApp</td><td>Prioritário 24/7</td></tr>
-          <tr><td>Gerente de conta</td><td><span class="ck-no">—</span></td><td class="featured-col"><span class="ck-no">—</span></td><td><span class="ck-yes">✓</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-
-<!-- ================================================================
-     TESTIMONIALS
-     ================================================================ -->
-<section id="testimonials" class="section">
-  <div class="wrap">
-
-    <div class="text-center mb-5" data-aos="fade-up">
-      <div class="gl mx-auto d-block"></div>
-      <p class="eyebrow mb-3">Resultados Reais</p>
-      <h2 class="section-title">O que dizem os barbeiros<br><span class="t-gold">que já nivelaram</span></h2>
-    </div>
-
-    <div class="testi-grid">
-      {% set testimonials = [
-        ("JL", "João Luís", "Barbearia Luís Premium · São Paulo",
-         "Depois do Nivela, minha receita mensal subiu 38% em 2 meses. Os planos de assinatura são o diferencial. Hoje tenho 47 assinantes pagando todo mês.",
-         "+38% de receita em 2 meses"),
-        ("RS", "Rafael Silva", "RS Barbearia · Rio de Janeiro",
-         "Antes eu passava horas no WhatsApp gerenciando agenda. Hoje o sistema faz tudo. Sobrou tempo pra eu focar no que importa: o corte.",
-         "3h/dia economizadas"),
-        ("TC", "Thiago Costa", "Empire Barber Shop · Belo Horizonte",
-         "A taxa de no-show caiu de 35% para menos de 2%. Só isso já pagou o Nivela múltiplas vezes. O robô de confirmação é ouro.",
-         "No-show de 35% para 2%"),
-      ] %}
-      {% for av, name, role, text, result in testimonials %}
-      <div class="card card-gold-edge testi-card" data-aos="fade-up" data-aos-delay="{{ loop.index0 * 100 }}">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"{{ text }}"</p>
-        <div class="testi-result">📈 {{ result }}</div>
-        <div class="testi-author">
-          <div class="testi-avatar">{{ av }}</div>
+    <section class="client-login">
+      <div class="wrap">
+        <div class="client-login-inner">
           <div>
-            <div class="testi-name">{{ name }}</div>
-            <div class="testi-role">{{ role }}</div>
+            <div class="eyebrow">Área exclusiva</div>
+            <h3>Já é cliente <span class="gold">Nivela?</span></h3>
+            <p>Acesse o ambiente reservado para gerenciar agenda, fila, caixa, estoque, planos e equipe com segurança.</p>
+          </div>
+          <div class="client-actions">
+            <span class="access-seal"><i class="bi bi-shield-lock"></i> Acesso de cliente</span>
+            <a href="{{ url_for('site.entrar') }}" class="btn btn-gold"><i class="bi bi-box-arrow-in-right"></i> Entrar no sistema</a>
+            <span class="access-note">Ambiente restrito para contas ativas.</span>
           </div>
         </div>
       </div>
-      {% endfor %}
-    </div>
+    </section>
 
-  </div>
-</section>
-
-
-<!-- ================================================================
-     ★ ÁREA DO CLIENTE — Acesso ao sistema ★
-     ================================================================ -->
-<section id="client-login">
-  <div class="wrap">
-    <div class="client-login-inner" data-aos="zoom-in">
-      <div class="cl-left">
-        <p class="eyebrow cl-eyebrow">Área Exclusiva</p>
-        <h3 class="cl-title">Já é cliente <span class="t-gold">Nivela?</span></h3>
-        <p class="cl-sub">Acesse sua conta para gerenciar sua barbearia agora mesmo. O sistema está online e esperando por você.</p>
-      </div>
-      <div class="cl-right">
-        <div class="cl-status">
-          <span class="dot-green"></span>
-          Sistema online
+    <section class="section">
+      <div class="wrap">
+        <div class="final-cta">
+          <div class="eyebrow">Pronto para subir de nível?</div>
+          <h2>É hora de nivelar sua barbearia.</h2>
+          <p>Organize agenda, fila, caixa, estoque, planos e equipe antes que a bagunça custe mais caro que o sistema.</p>
+          <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
+            <a href="#pricing" class="btn btn-gold"><i class="bi bi-arrow-up-right"></i> Conhecer planos</a>
+            <a href="{{ url_for('site.entrar') }}" class="btn btn-ghost"><i class="bi bi-box-arrow-in-right"></i> Já tenho conta</a>
+          </div>
         </div>
-        <!-- ★ Este botão redireciona para a página de login do app ★ -->
-        <a href="/entrar" class="btn btn-gold">
-          <i class="bi bi-box-arrow-in-right"></i>
-          Entrar no sistema
-        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="#hero">
+            <img src="{{ static_asset('icons/dashboard-mark.png') }}" width="34" height="34" decoding="async" alt="">
+            <span>Nivela</span>
+          </a>
+          <p style="margin-top:12px; max-width:330px;">Software de gestão premium para barbearias que levam o negócio a sério. Agenda, fila, caixa, estoque, assinaturas e financeiro em um único lugar.</p>
+          <div class="footer-socials">
+            <a href="{{ url_for('site.institucional', secao='contato') }}" title="Contato comercial" aria-label="Contato comercial"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4>Produto</h4>
+          <ul>
+            <li><a href="#pain">Problemas</a></li>
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#pricing">Planos</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Empresa</h4>
+          <ul>
+            <li><button type="button" data-modal="sobre">Sobre nós</button></li>
+            <li><button type="button" data-modal="implantacao">Implantação</button></li>
+            <li><a href="#testimonials">Controles verificáveis</a></li>
+            <li><button type="button" data-modal="contato">Contato</button></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul>
+            <li><button type="button" data-modal="termos">Termos de Uso</button></li>
+            <li><button type="button" data-modal="privacidade">Privacidade</button></li>
+            <li><button type="button" data-modal="lgpd">LGPD</button></li>
+            <li><button type="button" data-modal="cookies">Cookies</button></li>
+          </ul>
+          <h4 class="support-title">Suporte</h4>
+          <ul>
+            <li><button type="button" data-help-open>Central de Ajuda</button></li>
+            <li><a href="{{ url_for('site.entrar') }}">Acessar Sistema</a></li>
+            </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© {{ ano_atual }} Nivela. SulCore - Todos os direitos reservados.</span>
+        <span class="footer-badge"><i class="bi bi-phone"></i> Acesso web para desktop e mobile</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="info-modal" id="institutionalModal" aria-hidden="true">
+    <div class="info-dialog" role="dialog" aria-modal="true" aria-labelledby="institutionalTitle">
+      <button class="info-modal-close" id="institutionalClose" type="button" aria-label="Fechar janela">
+        <i class="bi bi-x-lg"></i>
+      </button>
+      <div class="eyebrow">Institucional</div>
+      <h2 id="institutionalTitle">Nivela</h2>
+      <div id="institutionalBody">
+        <p>Informações institucionais do Nivela.</p>
       </div>
     </div>
   </div>
-</section>
 
+  <button class="support-fab" id="supportFab" type="button" aria-label="Abrir Central de Ajuda">
+    <i class="bi bi-headset"></i>
+    <span>Central de Ajuda</span>
+  </button>
 
-<!-- ================================================================
-     FAQ
-     ================================================================ -->
-<section id="faq" class="section">
-  <div class="wrap">
-
-    <div class="text-center mb-5" data-aos="fade-up">
-      <div class="gl mx-auto d-block"></div>
-      <p class="eyebrow mb-3">Tire Suas Dúvidas</p>
-      <h2 class="section-title">Perguntas <span class="t-gold">frequentes</span></h2>
-    </div>
-
-    <div class="faq-wrap" data-aos="fade-up" data-aos-delay="80">
-
-      {% set faqs = [
-        ("Preciso saber mexer com tecnologia?",
-         "Não. O Nivela foi pensado para o barbeiro, não para o TI. A interface é intuitiva e você aprende a usar em menos de 30 minutos. Temos onboarding guiado e suporte sempre disponível."),
-        ("Como funciona o trial de 7 dias?",
-         "Você cria sua conta gratuitamente, sem precisar cadastrar cartão de crédito. Por 7 dias tem acesso completo a todas as funcionalidades do plano escolhido. Depois, decide se continua."),
-        ("Posso trocar de plano depois?",
-         "Sim, a qualquer momento. Se sua barbearia crescer e precisar de mais barbeiros ou funcionalidades, você faz o upgrade com um clique. O valor é ajustado proporcionalmente."),
-        ("Meus clientes precisam baixar um app?",
-         "Não. O agendamento funciona pelo navegador, em qualquer celular. Seu cliente abre o link da bio do Instagram, escolhe o horário e pronto — sem instalar nada."),
-        ("Como funcionam os planos de assinatura para meus clientes?",
-         "Você cria os planos (Bronze, Prata, Gold etc.) com o número de créditos e serviços incluídos. Seu cliente escolhe, paga via Pix ou cartão, e o sistema desconta automaticamente a cada visita."),
-        ("Tenho garantia de devolução?",
-         "Sim. Se dentro de 30 dias você não estiver satisfeito, devolvemos 100% do valor pago, sem questionamentos e sem burocracia."),
-      ] %}
-
-      {% for q, a in faqs %}
-      <div class="faq-item">
-        <button class="faq-q">
-          {{ q }}
-          <span class="faq-icon">+</span>
+  <div class="support-modal" id="supportModal" aria-hidden="true">
+    <section class="support-panel" role="dialog" aria-modal="true" aria-labelledby="supportTitle">
+      <header class="support-header">
+        <div>
+          <div class="eyebrow">Central de Ajuda</div>
+          <h2 id="supportTitle">Encontre a resposta antes de abrir atendimento.</h2>
+          <p>Pesquise por assunto, leia a resposta conclusiva e, se ainda não resolver, envie os detalhes para atendimento especializado com retorno por email em até 48 horas úteis.</p>
+        </div>
+        <button class="support-close" id="supportClose" type="button" aria-label="Fechar Central de Ajuda">
+          <i class="bi bi-x-lg"></i>
         </button>
-        <div class="faq-a">
-          <div class="faq-a-inner">{{ a }}</div>
-        </div>
-      </div>
-      {% endfor %}
+      </header>
+      <div class="support-layout">
+        <aside class="support-sidebar" aria-label="Tópicos de ajuda">
+          <div class="support-search">
+            <i class="bi bi-search"></i>
+            <input id="supportSearch" type="search" placeholder="Buscar: agenda, caixa, estoque, login..." autocomplete="off">
+          </div>
+          <div class="support-quiz-entry">
+            <div class="support-quiz-copy">
+              <span>Diagnóstico rápido</span>
+              <strong>Não sabe qual tópico abrir?</strong>
+              <p>Responda 3 cliques e a Central te leva para a resposta que mais combina com a situação.</p>
+            </div>
+            <button class="support-quiz-button" id="supportQuizStart" type="button">
+              <i class="bi bi-magic"></i> Fazer quiz
+            </button>
+          </div>
+          <div class="support-chips" id="supportChips" aria-label="Categorias da Central de Ajuda"></div>
+          <div class="support-list" id="supportList"></div>
+        </aside>
 
-    </div>
+        <article class="support-answer" id="supportAnswer" aria-live="polite"></article>
+
+        <aside class="support-contact" id="supportContact" aria-label="Atendimento especializado">
+          <h3>Ainda não resolvi meu problema</h3>
+          <p>Antes de encaminhar, descreva o que aconteceu. Se a Central já tiver uma resposta cadastrada para esse assunto, vamos te direcionar para ela. Se não houver correspondência clara, você segue para um agente especializado.</p>
+          <form class="support-form" id="supportForm">
+            <div class="support-field">
+              <label for="supportName">Nome</label>
+              <input id="supportName" name="nome" type="text" autocomplete="name" required>
+            </div>
+            <div class="support-field">
+              <label for="supportEmail">Email para resposta</label>
+              <input id="supportEmail" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="support-field">
+              <label for="supportPhone">Telefone</label>
+              <input id="supportPhone" name="telefone" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="support-field">
+              <label for="supportProblem">Descrição do problema</label>
+              <textarea id="supportProblem" name="descricao" required placeholder="Conte o que você tentou fazer, onde travou e qual mensagem apareceu, se houver."></textarea>
+            </div>
+            <div class="support-suggestion" id="supportSuggestion"></div>
+            <div class="support-field support-file">
+              <span class="support-field-label">Anexo</span>
+              <input id="supportFiles" name="anexos" type="file" accept="image/*" multiple>
+              <label class="support-upload-trigger" for="supportFiles">
+                <span class="support-upload-icon"><i class="bi bi-image"></i></span>
+                <span class="support-upload-copy">
+                  <strong>Adicionar fotos do problema</strong>
+                  <span id="supportFileText">Nenhuma imagem selecionada</span>
+                </span>
+              </label>
+              <div class="support-form-note">Até 2 fotos. O email será aberto preenchido; anexe as imagens selecionadas antes de enviar.</div>
+            </div>
+            <div class="support-form-note">Atendimento por email em até 48 horas úteis. Quanto mais claro for o relato, mais rápido o agente consegue orientar.</div>
+            <button class="btn btn-gold" type="submit"><i class="bi bi-send"></i> Enviar para atendimento</button>
+            <div class="support-status" id="supportStatus" aria-live="polite"></div>
+          </form>
+        </aside>
+      </div>
+    </section>
   </div>
-</section>
 
-
-<!-- ================================================================
-     CTA FINAL
-     ================================================================ -->
-<section id="cta-final">
-  <div class="wrap">
-    <div class="cta-box" data-aos="zoom-in">
-      <div class="gl mx-auto d-block mb-4"></div>
-      <h2 class="cta-title">
-        É hora de nivelar<br>
-        <span class="t-gold">sua barbearia.</span>
-      </h2>
-      <p class="cta-sub">
-        Pare de perder dinheiro com no-show, agenda desorganizada e financeiro às cegas. Comece agora, de graça.
-      </p>
-      <div class="cta-actions">
-        <a href="#pricing" class="btn btn-gold" style="padding:16px 44px;font-size:1rem;">
-          <i class="bi bi-lightning-charge-fill"></i>
-          Testar 7 dias grátis — sem cartão
-        </a>
-        <a href="/entrar" class="btn btn-ghost" style="padding:16px 32px;font-size:1rem;">
-          <i class="bi bi-box-arrow-in-right"></i>
-          Já tenho conta
-        </a>
-      </div>
-      <p class="cta-note">
-        ✓ Sem cartão de crédito &nbsp;·&nbsp; ✓ 7 dias grátis &nbsp;·&nbsp; ✓ Garantia de 30 dias &nbsp;·&nbsp; ✓ Cancele quando quiser
-      </p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ================================================================
-     FOOTER
-     ================================================================ -->
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-
-      <div>
-        <a href="#" class="footer-brand-txt">N<span>i</span>vela</a>
-        <p class="footer-desc">
-          Software de gestão premium para barbearias que levam o negócio a sério. Agendamento, assinaturas e financeiro em um único lugar.
-        </p>
-        <div class="footer-socials">
-          <a href="#" class="fs-link" title="Instagram"><i class="bi bi-instagram"></i></a>
-          <a href="#" class="fs-link" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-          <a href="#" class="fs-link" title="YouTube"><i class="bi bi-youtube"></i></a>
-          <a href="#" class="fs-link" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-        </div>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Produto</div>
-        <ul class="footer-links">
-          <li><a href="#features">Recursos</a></li>
-          <li><a href="#pricing">Preços</a></li>
-          <li><a href="#demo">Demo</a></li>
-          <li><a href="#faq">FAQ</a></li>
-          <li><a href="#">Changelog</a></li>
-          <li><a href="#">Roadmap</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Empresa</div>
-        <ul class="footer-links">
-          <li><a href="#">Sobre nós</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Cases</a></li>
-          <li><a href="#">Afiliados</a></li>
-          <li><a href="#">Contato</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Legal</div>
-        <ul class="footer-links">
-          <li><a href="#">Termos de Uso</a></li>
-          <li><a href="#">Privacidade</a></li>
-          <li><a href="#">LGPD</a></li>
-          <li><a href="#">Cookies</a></li>
-        </ul>
-        <div class="footer-col-title mt-4">Suporte</div>
-        <ul class="footer-links">
-          <li><a href="#">Central de Ajuda</a></li>
-          <li><a href="/entrar">Acessar Sistema</a></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <p>© {{ 2025 }} Nivela. SulCore - Todos os direitos reservados.</p>
-      <div class="footer-badge">
-        <span class="fb-dot"></span>
-        Todos os sistemas operacionais
-      </div>
-    </div>
-  </div>
-</footer>
-
-
-<!-- ================================================================
-     SCRIPTS
-     ================================================================ -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 650,
-    easing: 'ease-out-quad',
-    once: true,
-    offset: 50
-  });
-</script>
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ static_asset('js/main.js') }}" data-support-src="{{ static_asset('js/support.js') }}" defer></script>
 </body>
 </html>
